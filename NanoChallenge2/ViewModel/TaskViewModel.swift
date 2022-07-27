@@ -15,6 +15,9 @@ class TaskViewModel : ObservableObject{
     @Published var taskDescription : String = ""
     @Published var taskDate : Date = Date()
     
+    // MARK: Show Date Picker
+    @Published var showDatePicker: Bool = false
+    
     // MARK: Current Week Days
     @Published var currentWeek: [Date] = []
     
@@ -116,5 +119,12 @@ class TaskViewModel : ObservableObject{
             return true
         }
         return false
+    }
+    
+    // MARK: Resetting Data
+    func resetTaskData(){
+        taskTitle = ""
+        taskDescription = ""
+        taskDate = Date()
     }
 }

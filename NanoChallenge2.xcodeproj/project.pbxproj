@@ -25,6 +25,7 @@
 		4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926252890794900A9E517 /* DynamicFilterView.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 		4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */; };
+		4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		4C2926252890794900A9E517 /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskView.swift; sourceTree = "<group>"; };
+		4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewBU.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		4C292611288FCB2F00A9E517 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CF2A7042891558200B8D1EC /* BackUpViews */,
 				4C29261B2890356200A9E517 /* BackUp.swift */,
 				4C29262028906FAA00A9E517 /* Components */,
 				4C2925E9288F904600A9E517 /* HomeView.swift */,
@@ -139,6 +142,14 @@
 				4C2926232890700600A9E517 /* TaskView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		4CF2A7042891558200B8D1EC /* BackUpViews */ = {
+			isa = PBXGroup;
+			children = (
+				4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */,
+			);
+			path = BackUpViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 			files = (
 				4C2925E3288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld in Sources */,
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
+				4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
 				4C2925EA288F904600A9E517 /* HomeView.swift in Sources */,
