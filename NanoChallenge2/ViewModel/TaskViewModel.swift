@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import CoreData
 
 class TaskViewModel : ObservableObject{
     
+    // MARK: New Task Properties
+    @Published var taskTitle : String = ""
+    @Published var taskDescription : String = ""
+    @Published var taskDate : Date = Date()
     
     // MARK: Current Week Days
     @Published var currentWeek: [Date] = []
@@ -99,5 +104,17 @@ class TaskViewModel : ObservableObject{
         let isToday = calendar.isDateInToday(date)
         
         return (hour == currentHour && isToday)
+    }
+    
+    func addTask(context : NSManagedObjectContext)->Bool{
+        let task = Task(context: context)
+        task.taskTitle = taskTitle
+        task.taskDescription = taskDescription
+        task.taskDate = taskDate
+        
+        if let _ = try? context.save(){
+            return true
+        }
+        return false
     }
 }
