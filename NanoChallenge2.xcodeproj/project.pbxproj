@@ -22,6 +22,9 @@
 		4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C29261D28906AD600A9E517 /* CoreData.xcdatamodeld */; };
 		4C29262228906FB400A9E517 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C29262128906FB400A9E517 /* HeaderView.swift */; };
 		4C2926242890700600A9E517 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926232890700600A9E517 /* TaskView.swift */; };
+		4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926252890794900A9E517 /* DynamicFilterView.swift */; };
+		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
+		4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		4C29261E28906AD600A9E517 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		4C29262128906FB400A9E517 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		4C2926232890700600A9E517 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		4C2926252890794900A9E517 /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
+		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +63,6 @@
 		4C2925CA288F8EFA00A9E517 = {
 			isa = PBXGroup;
 			children = (
-				4C29261B2890356200A9E517 /* BackUp.swift */,
 				4C2925D5288F8EFB00A9E517 /* NanoChallenge2 */,
 				4C2925D4288F8EFB00A9E517 /* Products */,
 			);
@@ -109,8 +114,12 @@
 		4C292611288FCB2F00A9E517 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4C29261B2890356200A9E517 /* BackUp.swift */,
 				4C29262028906FAA00A9E517 /* Components */,
 				4C2925E9288F904600A9E517 /* HomeView.swift */,
+				4C2926252890794900A9E517 /* DynamicFilterView.swift */,
+				4CF2A70028907EB600B8D1EC /* NewTaskView.swift */,
+				4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -208,12 +217,15 @@
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
 				4C2925EA288F904600A9E517 /* HomeView.swift in Sources */,
 				4C2925EC288F942100A9E517 /* NavigationView.swift in Sources */,
+				4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */,
 				4C29261C2890356200A9E517 /* BackUp.swift in Sources */,
 				4C2926242890700600A9E517 /* TaskView.swift in Sources */,
 				4C29262228906FB400A9E517 /* HeaderView.swift in Sources */,
 				4C29261A288FD20300A9E517 /* Helper.swift in Sources */,
+				4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */,
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
+				4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

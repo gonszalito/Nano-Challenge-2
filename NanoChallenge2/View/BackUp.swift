@@ -11,6 +11,10 @@ struct TestView: View {
     @StateObject var taskModel : TaskViewModel = TaskViewModel()
     @Namespace var animation
     
+    // MARK: Core Date Context
+    @Environment(\.managedObjectContext) var context
+    
+    
     var body: some View {
         ScrollView(.vertical,showsIndicators: false){
             
@@ -78,6 +82,24 @@ struct TestView: View {
             
         }.ignoresSafeArea(.container,edges: .top)
         
+        // MARK: Add Button
+            .overlay(
+                Button(action: {
+                    taskModel.addNewTask.toggle()
+                }, label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.black, in: Circle())
+                }).toBot()
+            )
+            .sheet(isPresented: $taskModel.addNewTask) {
+                // Clearing Edit Data
+                taskModel.editTask = nil
+            } content : {
+                NewTaskView()
+                    .environmentObject(taskModel)
+            }
     }
     
     // MARK: Tasks View
@@ -85,35 +107,16 @@ struct TestView: View {
         
         LazyVStack(spacing : 18){
             
-            if let tasks = taskModel.filteredTasks{
-                if tasks.isEmpty{
-                    
-                    Text("No tasks found")
-                        .font(.system(size:16))
-                        .fontWeight(.light)
-                        .offset(y: 100)
-                }
-                else{
-                    
-                    ForEach(tasks){task in
-                        TaskCardView(task: task)
-                    }
-                    
-                }
-            }else {
-                //MARK: Progress View
-                ProgressView()
-                    .offset(y: 100)
+            // Converting object as Task Model
+            DynamicFilterView(dateToFilter: taskModel.currentDate) {
+                (object : Task) in
+                
+                TaskCardView(task: object)
             }
-            
         }
         .padding()
         .padding(.top)
-        // MARK: Updating Tasks
-        .onChange(of: taskModel.currentDate) { newValue in
-            taskModel.filterTodayTasks()
-            
-        }
+        
     }
     
     // MARK: Task Card View
@@ -122,14 +125,14 @@ struct TestView: View {
         HStack(alignment: .top, spacing: 30){
             VStack(spacing: 10){
                 Circle()
-                    .fill(taskModel.isCurrentHour(date: task.taskDate) ? .black : .clear )
+                    .fill(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ?(task.isCompleted ? .green : .black) : .clear )
                     .frame(width: 15, height: 15)
                     .background(
                         Circle()
                             .stroke(.black,lineWidth: 1)
                             .padding(-3)
                     )
-                    .scaleEffect(taskModel.isCurrentHour(date: task.taskDate) ? 0.8 : 1)
+                    .scaleEffect(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 0.8 : 1)
                 Rectangle()
                     .fill()
                     .frame(width: 3)
@@ -147,51 +150,74 @@ struct TestView: View {
                 HStack(alignment: .top, spacing: 10) {
                     
                     VStack(alignment: .leading, spacing: 12){
-                        Text(task.taskTitle)
+                        Text(task.taskTitle ?? "")
                             .font(.title2.bold())
-                        Text(task.taskDescription)
+                        Text(task.taskDescription ?? "")
                             .font(.callout)
                             .foregroundStyle(.secondary)
+                        
+                        if(task.taskDate ?? Date() ) >= Date(){
+                            Button {
+                                taskModel.editTask = task
+                                taskModel.addNewTask.toggle()
+                            } label: {
+                                Image(systemName: "pencil.circle")
+                                    .foregroundColor(.primary)
+                            }
+                        }
                     }
                     .hLeading()
                     
-                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
+                    Text(task.taskDate?.formatted(date: .omitted, time: .shortened) ?? "")
                     
                 }
                 
-//                // MARK: Team Members
-//                HStack(spacing: 0){
-//                    HStack(spacing: -10){
-//
-//                    }
-//                }
+                //                // MARK: Team Members
+                //                HStack(spacing: 0){
+                //                    HStack(spacing: -10){
+                //
+                //                    }
+                //                }
                 
-                if taskModel.isCurrentHour(date: task.taskDate){
-                    HStack(spacing:0){
-                        // MARK: Check Button
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "checkmark")
-                                .foregroundStyle(.black)
-                                .padding(10)
-                                .background(Color.white,in: RoundedRectangle(cornerRadius: 10))
-                        }.hTrailing()
+                if taskModel.isCurrentHour(date: task.taskDate ?? Date()){
+                    HStack(spacing:12
+                    ){
+                        
+                        if !task.isCompleted{
+                            // MARK: Check Button
+                            Button {
+                                //Updating Status
+                                task.isCompleted = true
+                                
+                                //Saving
+                                try? context.save()
+                            } label: {
+                                Image(systemName: "checkmark")
+                                    .foregroundStyle(.black)
+                                    .padding(10)
+                                    .background(Color.white,in: RoundedRectangle(cornerRadius: 10))
+                            }.hTrailing()
+                        }
+                        Text(task.isCompleted ? "Completed" : "Mark Task as Completed")
+                            .font(.system(size : task.isCompleted ? 14 : 16, weight: .light))
+                            .foregroundColor(task.isCompleted ? .gray : .white)
+                            .hLeading()
                         
                     }
+                    .padding(.top)
                 }
-                               
+                
             }
-            .foregroundColor(taskModel.isCurrentHour(date: task.taskDate) ? .white : .black)
-            .padding(taskModel.isCurrentHour(date: task.taskDate) ? 15:0)
-            .padding(.bottom,taskModel.isCurrentHour(date: task.taskDate) ? 0 : 10)
+            .foregroundColor(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? .white : .black)
+            .padding(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 15:0)
+            .padding(.bottom,taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 0 : 10)
             .hLeading()
             .background(
                 Color(UIColor.black)
                     .cornerRadius(25)
-                    .opacity(taskModel.isCurrentHour(date: task.taskDate) ? 1 : 0)
+                    .opacity(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 1 : 0)
             )
-                
+            
             
         }
         .hLeading()
@@ -216,7 +242,7 @@ struct TestView: View {
             Button {
                 
             } label: {
-                Image(systemName: "plus")
+                Image(systemName: "pencil")
                     .font(.system(size: 30))
             }
             Button {
@@ -225,7 +251,6 @@ struct TestView: View {
                 Image(systemName: "plus")
                     .font(.system(size: 30))
             }
-            
             
         }
         .padding()
