@@ -8,13 +8,31 @@
 import SwiftUI
 import CoreData
 
+struct weekArray: Identifiable {
+    let id = UUID().uuidString
+    let week: [Date]
+}
+
 class TaskViewModel : ObservableObject{
+    
+    @Environment(\.managedObjectContext) var context
     
     // MARK: New Task Properties
     @Published var taskTitle : String = ""
     @Published var taskDescription : String = ""
     @Published var taskDate : Date = Date()
     @Published var taskFinishTime : Date = Date()
+    
+    // MARK: All Tasks
+    @Published var allTask : [Task] = []
+    
+    // MARK: Tab Bar Index
+    @Published var weekIndex : Int = 2
+    
+    @Published var arrAll : [weekArray] = []
+    
+    // MARK: 3 weeks combined
+    @Published var allWeeks : [[Date]] = [[Date()]]
     
     // MARK: Determine Task Page Title
     @Published var taskPageTitle : String = ""
@@ -34,6 +52,12 @@ class TaskViewModel : ObservableObject{
     // MARK: Current Week Days
     @Published var currentWeek: [Date] = []
     
+    // MARK: Next Week
+    @Published var nextWeek : [Date] = []
+    
+    // MARK: Previous Week
+    @Published var previousWeek : [Date] = []
+    
     // MARK: Current Day
     @Published var currentDate : Date = Date()
     
@@ -49,6 +73,10 @@ class TaskViewModel : ObservableObject{
     // MARK: Initializing
     init() {
         fetchCurrentWeek()
+        fetchPreviousNextWeek()
+        appendAllWeek()
+        fetchAllTasks()
+//        fetchPreviousNextWeek()
         //        filterTodayTasks()
     }
     
@@ -92,16 +120,22 @@ class TaskViewModel : ObservableObject{
     func fetchCurrentWeek(){
         
         let today = Date()
-        let calendar = Calendar.current
+        var calendar = Calendar(identifier: .gregorian)
+//        calendar.locale = Locale(identifier: "en_US")
         
-        let week = calendar.dateInterval(of: .weekOfMonth, for: today)
-        
-        guard let firstWeekDay = week?.start else {
-            return
-        }
+//        Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 7
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
+//        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
+//
+//        let week = calendar.dateInterval(of: .weekOfMonth, for: today)
+//
+//        guard let firstWeekDay = week?.start else {
+//            return
+//        }
         
         (1...7).forEach{ day in
-            if let weekday = calendar.date(byAdding: .day, value: day, to: firstWeekDay){
+            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
                 currentWeek.append(weekday)
             }
             
@@ -109,6 +143,128 @@ class TaskViewModel : ObservableObject{
         
     }
     
+    func fetchNextWeek(){
+        currentWeek.removeAll()
+        
+        let nextWeekToday = Calendar.current.date(byAdding: .day, value: 7, to: currentDate)!
+        currentDate = nextWeekToday
+        
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 7
+        
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: nextWeekToday))!
+        
+        (1...7).forEach{ day in
+            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
+                currentWeek.append(weekday)
+            }
+            
+        }
+        
+        
+    }
+    
+//    func refreshWeek() {
+//        if weekIndex == 3 {
+//            fetchNextWeek()
+//            fetchPreviousNextWeek()
+////            weekIndex = 2
+//        } else if weekIndex == 1 {
+//            fetchPreviousWeek()
+//            fetchPreviousNextWeek()
+////            weekIndex = 2
+//        }
+//    }
+    
+    func appendAllWeek() {
+        allWeeks.removeAll()
+        allWeeks.append(previousWeek)
+        allWeeks.append(currentWeek)
+        allWeeks.append(nextWeek)
+        arrAll.append(weekArray(week: previousWeek))
+        arrAll.append(weekArray(week: currentWeek))
+        arrAll.append(weekArray(week: nextWeek))
+    }
+    
+    func fetchPreviousWeek(){
+        currentWeek.removeAll()
+        
+        let nextWeekToday = Calendar.current.date(byAdding: .day, value: -7, to: currentDate)!
+        currentDate = nextWeekToday
+        
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 7
+        
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: nextWeekToday))!
+        
+        (1...7).forEach{ day in
+            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
+                currentWeek.append(weekday)
+            }
+            
+        }
+        
+ 
+        
+    }
+    
+    func fetchPreviousNextWeek(){
+        
+        nextWeek.removeAll()
+        
+        let nextWeekToday = Calendar.current.date(byAdding: .day, value: 7, to: currentDate)!
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 7
+        
+        let startOfWeekNext = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: nextWeekToday))!
+        
+        (1...7).forEach{ day in
+            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeekNext){
+                nextWeek.append(weekday)
+            }
+            
+        }
+        
+        previousWeek.removeAll()
+        let previousWeekToday = Calendar.current.date(byAdding: .day, value: -7, to: currentDate)!
+
+        
+        let startOfWeekPrev = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: previousWeekToday))!
+        
+        (1...7).forEach{ day in
+            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeekPrev){
+                previousWeek.append(weekday)
+            }
+            
+        }
+
+
+    }
+    
+    
+//    func fetchNextWeek(day: Date){
+//
+//        let today = Date()
+//        let calendar = Calendar.current.firstWeekday
+//
+//        let week = calendar.dateInterval(of: .weekOfMonth, for: today)
+//
+//        guard let firstWeekDay = week?.start else {
+//            return
+//        }
+//
+//        (1...7).forEach{ day in
+//            if let weekday = calendar.date(byAdding: .day, value: day, to: firstWeekDay){
+//                currentWeek.append(weekday)
+//            }
+//
+//        }
+//        calendar.
+//
+//    }
+//
+//
     // MARK: Extracting Date
     func extractDate(date: Date,format: String)->String{
         let formatter = DateFormatter()
@@ -179,5 +335,29 @@ class TaskViewModel : ObservableObject{
             taskDate = editTask.taskDate ?? Date()
             taskFinishTime = editTask.taskFinishTime ?? Date()
         }
+    }
+    
+    func fetchAllTasks(){
+        
+        
+//        do {
+//            let request = Task.fetchRequest() as NSFetchRequest<Task>
+//            let tasks = try self.context.fetch(request)
+//            self.allTask = tasks
+//
+//        } catch {
+//
+////        }
+////
+//        // Create a fetch request for a specific Entity type
+//        let fetchRequest: NSFetchRequest<Task>
+//        fetchRequest = Task.fetchRequest()
+//
+//        // Get a reference to a NSManagedObjectContext
+//        let context = PersistenceController
+//
+//        // Fetch all objects of one Entity type
+//        let objects = try context.fetch(fetchRequest)
+//        
     }
 }

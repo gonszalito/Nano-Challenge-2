@@ -84,7 +84,7 @@ struct NewTaskView: View {
                     
                     
                     TextField("Write title here", text: $taskModel.taskTitle)
-                        .font(.title2)
+                        .font(.title2.bold())
                         .overlay(alignment: .trailing){
                             
                         }
@@ -104,6 +104,7 @@ struct NewTaskView: View {
                         Text(taskModel.taskDate.formatted(date : .abbreviated, time: .omitted))
                             .font(.title2.bold())
                             .onTapGesture {
+                                UIApplication.shared.endEditing()
                                 taskModel.showDatePicker.toggle()
                         }
                         
@@ -132,7 +133,9 @@ struct NewTaskView: View {
                 }
                 .overlay(alignment: .trailing){
                     Button{
+                        UIApplication.shared.endEditing()
                         taskModel.showDatePicker.toggle()
+                        
                     }label: {
                         Image(systemName: "calendar")
                     }
@@ -161,6 +164,7 @@ struct NewTaskView: View {
                         
                         Text(taskModel.taskDate.formatted(date : .omitted, time: .shortened))
                             .onTapGesture {
+                                UIApplication.shared.endEditing()
                                 taskModel.showStartPicker.toggle()
                                 
                             }
@@ -173,6 +177,7 @@ struct NewTaskView: View {
                     .frame(maxWidth : .infinity, alignment: .leading)
                     .overlay(alignment: .trailing){
                         Button{
+                            UIApplication.shared.endEditing()
                             taskModel.showStartPicker.toggle()
                         }label: {
                             Image(systemName: "chevron.down")
@@ -191,6 +196,7 @@ struct NewTaskView: View {
                         
                         Text(taskModel.taskFinishTime.formatted(date : .omitted, time: .shortened))
                             .onTapGesture {
+                                UIApplication.shared.endEditing()
                                 taskModel.showFinishPicker.toggle()
                                 
                                 
@@ -202,6 +208,7 @@ struct NewTaskView: View {
                     .frame(maxWidth : .infinity, alignment: .leading)
                     .overlay(alignment: .trailing){
                         Button{
+                            UIApplication.shared.endEditing()
                             taskModel.showFinishPicker.toggle()
                             
                             
@@ -237,7 +244,18 @@ struct NewTaskView: View {
                     }
                     
                 )
-                
+                Button {
+                    
+                }label: {
+                    Text("Add Task")
+                        .fontWeight(.bold)
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            Capsule()
+                                .fill(.red)
+                        )
+                }
                 
                 Button("Delete"){
                     if let editTask = taskModel.editTask {
@@ -328,6 +346,9 @@ struct NewTaskView: View {
                     
                     // MARK: Disabling Past Dates
                     DatePicker.init("",selection: $taskModel.taskDate,in:Date.now...Date.distantFuture,displayedComponents: [.date])
+                        .onChange(of: taskModel.taskDate, perform: { _ in
+                            taskModel.showDatePicker = false
+                        })
                         .datePickerStyle(.graphical)
                         .labelsHidden()
                         .padding()

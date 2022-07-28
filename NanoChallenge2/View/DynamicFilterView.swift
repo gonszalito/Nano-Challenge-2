@@ -56,3 +56,4 @@ struct DynamicFilterView<Content: View,T>: View where T : NSManagedObject{
 }
 
 
+
