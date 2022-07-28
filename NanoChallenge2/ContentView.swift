@@ -9,9 +9,11 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    
+    @State var currentIndex: Int = 0
+    
     var body: some View {
-        CarouselView()
-        
+       TestView()
     }
 }
 

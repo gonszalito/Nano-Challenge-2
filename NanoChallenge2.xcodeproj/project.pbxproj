@@ -30,6 +30,10 @@
 		4C7981172892CB85000BE4BE /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7981162892CB85000BE4BE /* CarouselView.swift */; };
 		4C7981192892D1D1000BE4BE /* CarouselList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7981182892D1D1000BE4BE /* CarouselList.swift */; };
 		4C79811B2892D7C0000BE4BE /* testCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79811A2892D7C0000BE4BE /* testCarousel.swift */; };
+		4C7981362893015A000BE4BE /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7981352893015A000BE4BE /* SnapCarousel.swift */; };
+		4C79813828930B68000BE4BE /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813728930B68000BE4BE /* CustomDatePicker.swift */; };
+		4C79813A28930E56000BE4BE /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813928930E56000BE4BE /* DateValue.swift */; };
+		4C79813C289328C8000BE4BE /* CustomDatePicker2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813B289328C8000BE4BE /* CustomDatePicker2.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 		4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */; };
 		4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */; };
@@ -60,6 +64,10 @@
 		4C7981162892CB85000BE4BE /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		4C7981182892D1D1000BE4BE /* CarouselList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselList.swift; sourceTree = "<group>"; };
 		4C79811A2892D7C0000BE4BE /* testCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCarousel.swift; sourceTree = "<group>"; };
+		4C7981352893015A000BE4BE /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
+		4C79813728930B68000BE4BE /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		4C79813928930E56000BE4BE /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		4C79813B289328C8000BE4BE /* CustomDatePicker2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker2.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewBU.swift; sourceTree = "<group>"; };
@@ -143,6 +151,10 @@
 				4C79811228928C14000BE4BE /* SwiftUIView.swift */,
 				4C7981162892CB85000BE4BE /* CarouselView.swift */,
 				4C79811A2892D7C0000BE4BE /* testCarousel.swift */,
+				4C7981352893015A000BE4BE /* SnapCarousel.swift */,
+				4C79813728930B68000BE4BE /* CustomDatePicker.swift */,
+				4C79813928930E56000BE4BE /* DateValue.swift */,
+				4C79813B289328C8000BE4BE /* CustomDatePicker2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +201,8 @@
 			dependencies = (
 			);
 			name = NanoChallenge2;
+			packageProductDependencies = (
+			);
 			productName = NanoChallenge2;
 			productReference = 4C2925D3288F8EFB00A9E517 /* NanoChallenge2.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +231,8 @@
 				Base,
 			);
 			mainGroup = 4C2925CA288F8EFA00A9E517;
+			packageReferences = (
+			);
 			productRefGroup = 4C2925D4288F8EFB00A9E517 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -252,8 +268,10 @@
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
 				4C2925EA288F904600A9E517 /* HomeView.swift in Sources */,
 				4C2925EC288F942100A9E517 /* NavigationView.swift in Sources */,
+				4C7981362893015A000BE4BE /* SnapCarousel.swift in Sources */,
 				4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */,
 				4C29261C2890356200A9E517 /* BackUp.swift in Sources */,
+				4C79813828930B68000BE4BE /* CustomDatePicker.swift in Sources */,
 				4C2926242890700600A9E517 /* TaskView.swift in Sources */,
 				4C29262228906FB400A9E517 /* HeaderView.swift in Sources */,
 				4C29261A288FD20300A9E517 /* Helper.swift in Sources */,
@@ -265,8 +283,10 @@
 				4C79811B2892D7C0000BE4BE /* testCarousel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */,
+				4C79813A28930E56000BE4BE /* DateValue.swift in Sources */,
 				4C798111289253BC000BE4BE /* TestTextView.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
+				4C79813C289328C8000BE4BE /* CustomDatePicker2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

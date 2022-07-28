@@ -11,6 +11,9 @@ struct TestView: View {
     @StateObject var taskModel : TaskViewModel = TaskViewModel()
     @Namespace var animation
     
+    // MARK: Animation Properties
+    @State var animatedStates : [Bool] = Array(repeating: false, count: 3)
+    
     @State private var index = 2
     
     // MARK: Core Date Context
@@ -60,6 +63,40 @@ struct TestView: View {
                     }
                     //                    .frame(alignment: .center)
                     .hLeading()
+                    
+                    Button {
+                        stopAnimation()
+
+                        
+                    } label: {
+                        Image(systemName: "circle")
+                            .tint(.black)
+                            .font(.system(size: 28))
+                            .ignoresSafeArea()
+                        
+                   
+                    }
+                    
+                    Button {
+                        startAnimation()
+                        
+                    } label: {
+                        Image(systemName: "calendar")
+                            .tint(.black)
+                            .font(.system(size: 28))
+                            .ignoresSafeArea()
+                        
+                   
+                    }
+                    
+                    Button {
+                        taskModel.fetchPreviousWeek()
+                    } label: {
+                        Image(systemName: "circle")
+                            .tint(.black)
+                            .font(.system(size: 28))
+                    }
+                    
                     Button {
                         taskModel.fetchNextWeek()
                     } label: {
@@ -83,38 +120,51 @@ struct TestView: View {
                 //                .background(.red)
                 .cornerRadius(30)
 //                WeekCardView(week: taskModel.previousWeek)
+
+//                          .onChange(of: taskModel.allWeeks, perform: <#T##(Equatable) -> Void##(Equatable) -> Void##(_ newValue: Equatable) -> Void#>)
+                .frame(height: 100)
                 
-                ACarousel(taskModel.allWeeks) { week in
-                    
-                    WeekCardView(week: week)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 300)
-                        .cornerRadius(30)
-                }
-                .frame(height: 300)
-                
-//                VStack {
+//                VStack{
 //                    TabView(selection: $taskModel.weekIndex) {
-//                        WeekCardView(week: taskModel.previousWeek)
-//                                .tag(1)
-//                                .border(.blue)
-//
-//                        WeekCardView(week: taskModel.currentWeek)
-//                                .tag(2)
-//
-//                        WeekCardView(week: taskModel.nextWeek)
-//                                .tag(3)
-//
-////                        ForEach(taskModel.allWeeks, id: \.self) { week in
-////
-////                            WeekCardView(week: week)
-////                                .tag(week)
-////                        }
-//
-//
+//                        ForEach(taskModel.allWeeks, id: \.self) { week in
+//                            HStack{
+//                              WeekCardView(week: week)
+//                                  .tag(week)
+//                            }
+//                          }
 //                    }
 //                    .frame(height: 100, alignment: .center)
+//                                      .onChange(of: taskModel.weekIndex) { _ in
+//                  //                        taskModel.refreshWeek()}
+//                  //                        if taskModel.currentWeek == taskModel.nextWeek {
+//                                      }
+//                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//                }
+                                     
+//                VStack {
+//                    TabView(selection: $taskModel.weekIndex) {
+////                        WeekCardView(week: taskModel.previousWeek)
+////                                .tag(1)
+////                                .border(.blue)
+////
+////                        WeekCardView(week: taskModel.currentWeek)
+////                                .tag(2)
+////
+////                        WeekCardView(week: taskModel.nextWeek)
+////                                .tag(3)
+//
+//                        ForEach(taskModel.arrAll, id: \.self) { week in
+//
+//                            WeekCardView(week: week)
+////                                .tag(week)
+//
+//                        }
+//
+////
+//                    }
+//                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//                    .frame(height: 100, alignment: .center)
+//                }
 //                    .onChange(of: taskModel.weekIndex) { _ in
 ////                        taskModel.refreshWeek()
 ////                        if taskModel.currentWeek == taskModel.nextWeek {
@@ -150,51 +200,82 @@ struct TestView: View {
                      
                 
                 // MARK: Week View
-//                HStack(spacing : 10){
-//                    ForEach(taskModel.currentWeek,id: \.self) { day in
-//
-//                        VStack(spacing : 10){
-//                            Text(taskModel.extractDate(date: day, format: "EEE"))
-//                                .font(.system(size:14))
-//                                .fontWeight(.semibold)
-//
-//                            Text(taskModel.extractDate(date: day, format: "dd"))
-//                                .font(.system(size:14))
-//
-//                            Circle()
-//                                .fill(.white)
-//                                .frame(width: 8, height: 8)
-//                                .opacity(taskModel.isToday(date: day) ? 1 : 0)
-//                        }
-//                        // MARK: Foreground Style
-//                        .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
-//                        .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
-//                        // MARK: Capsule Shape
-//                        .frame(width: 45, height: 90)
-//                        .background(
-//                            ZStack{
-//                                // MARK:
-//                                if taskModel.isToday(date: day){
-//                                    Capsule()
-//                                        .fill(.black)
-//                                        .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
-//                                }
-//
-//
-//                            }
-//                        )
-//                        .contentShape(Capsule())
-//                        .onTapGesture {
-//                            // Updating Current Day
-//                            withAnimation{
-//                                taskModel.currentDate = day
-//                            }
-//                        }
-//
-//                    }
-//                }
-//                .frame(maxWidth: .infinity, alignment: .center)
+                ZStack{
+                HStack(spacing : 10){
+                    ForEach(taskModel.currentWeek,id: \.self) { day in
+
+                        VStack(spacing : 10){
+                            Text(taskModel.extractDate(date: day, format: "EEE"))
+                                .font(.system(size:14))
+                                .fontWeight(.semibold)
+
+                            Text(taskModel.extractDate(date: day, format: "dd"))
+                                .font(.system(size:14))
+
+                            Circle()
+                                .fill(.white)
+                                .frame(width: 8, height: 8)
+                                .opacity(taskModel.isToday(date: day) ? 1 : 0)
+                        }
+                        // MARK: Foreground Style
+                        .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
+                        .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
+                        // MARK: Capsule Shape
+                        .frame(width: 45, height: 90)
+                        .background(
+                            ZStack{
+                                // MARK:
+                                if taskModel.isToday(date: day){
+                                    Capsule()
+                                        .fill(.black)
+                                        .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+                                }
+
+
+                            }
+                        )
+                        .contentShape(Capsule())
+                        .onTapGesture {
+                            // Updating Current Day
+                            withAnimation{
+                                taskModel.currentDate = day
+                            }
+                        }
+
+                    }
+                   
+                }
                 
+                .background(
+                    Rectangle()
+                        .fill(.clear)
+                        .matchedGeometryEffect(id: "DATEVIEW", in: animation)
+                )
+                .frame(maxWidth: .infinity, alignment: .center)
+                
+                    
+                    if animatedStates[0]{
+                        // MARK: Home View
+                        CustomDatePicker( taskModel: taskModel, currentDate: $taskModel.currentDate)
+                            .background(
+                                RoundedRectangle(cornerRadius: 30,style: .continuous)
+                                    .fill(Color.red)
+                                    .matchedGeometryEffect(id: "DATEVIEW", in: animation)
+                            )
+                    }
+                    
+          
+                }
+//                DatePicker.init("",selection: $taskModel.taskDate,displayedComponents: [.date])
+//                    .onChange(of: taskModel.taskDate, perform: { _ in
+////                        taskModel.showDatePicker = false
+//                    })
+//                    .datePickerStyle(.graphical)
+//                    .labelsHidden()
+//                    .padding()
+//                    .background(.white, in: RoundedRectangle(cornerRadius: 12,style: .continuous))
+//                    .padding()
+//
                 ScrollView(.vertical,showsIndicators: false) {
                     VStack{
                         NewTasksView().padding(.horizontal,10)
@@ -222,48 +303,52 @@ struct TestView: View {
     
     func WeekCardView(week : [Date])->some View{
         HStack{
-            ForEach(week,id: \.self) { day in
-                
-                VStack(spacing : 10){
-                    Text(taskModel.extractDate(date: day, format: "EEE"))
-                        .font(.system(size:14))
-                        .fontWeight(.semibold)
+            
+            ZStack {
+                ForEach(week,id: \.self) { day in
                     
-                    Text(taskModel.extractDate(date: day, format: "dd"))
-                        .font(.system(size:14))
-                    
-//                    Circle()
-//                        .fill(.white)
-//                        .frame(width: 8, height: 8)
-//                        .opacity(taskModel.isToday(date: day) ? 1 : 0)
-                }
-                // MARK: Foreground Style
-                .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
-                .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
-                // MARK: Capsule Shape
-                .frame(width: 45, height: 90)
-                .background(
-                    ZStack{
-                        // MARK:
-                        if taskModel.isToday(date: day){
-                            Capsule()
-                                .fill(.black)
-                                .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+                    VStack(spacing : 10){
+                        Text(taskModel.extractDate(date: day, format: "EEE"))
+                            .font(.system(size:14))
+                            .fontWeight(.semibold)
+                        
+                        Text(taskModel.extractDate(date: day, format: "dd"))
+                            .font(.system(size:14))
+                        
+    //                    Circle()
+    //                        .fill(.white)
+    //                        .frame(width: 8, height: 8)
+    //                        .opacity(taskModel.isToday(date: day) ? 1 : 0)
+                    }
+                    // MARK: Foreground Style
+                    .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
+                    .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
+                    // MARK: Capsule Shape
+                    .frame(width: 45, height: 90)
+                    .background(
+                        ZStack{
+                            // MARK:
+                            if taskModel.isToday(date: day){
+                                Capsule()
+                                    .fill(.black)
+                                    .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+                            }
+                            
+                            
                         }
-                        
-                        
+                    )
+                    .contentShape(Capsule())
+                    .onTapGesture {
+                        // Updating Current Day
+                        withAnimation{
+                            taskModel.currentDate = day
+                        }
                     }
-                )
-                .contentShape(Capsule())
-                .onTapGesture {
-                    // Updating Current Day
-                    withAnimation{
-                        taskModel.currentDate = day
-                    }
+                    
                 }
-                
+                .frame(maxWidth : .infinity)
+                .border(.blue)
             }
-            .frame(maxWidth : .infinity)
         }
     }
     
@@ -512,6 +597,46 @@ struct TestView: View {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(.black)
         }
+    }
+    
+    
+    func startAnimation(){
+        // MARK: Displaying Splash Icon for Some Time
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // your code here
+            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.7, blendDuration: 0.7)){
+                animatedStates[0] = true
+            }
+        }
+        
+        
+        
+//        DispatchQueue.main.asyncAfter() {
+//            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.7, blendDuration: 0.7)){
+//                animatedStates[0]
+//            }
+//        }
+    }
+    
+    
+    func stopAnimation(){
+        // MARK: Displaying Splash Icon for Some Time
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // your code here
+            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.7, blendDuration: 0.7)){
+                animatedStates[0] = false
+            }
+        }
+        
+        
+        
+//        DispatchQueue.main.asyncAfter() {
+//            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.7, blendDuration: 0.7)){
+//                animatedStates[0]
+//            }
+//        }
     }
     
 }

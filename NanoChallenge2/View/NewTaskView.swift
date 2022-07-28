@@ -244,7 +244,18 @@ struct NewTaskView: View {
                     }
                     
                 )
-                
+                Button {
+                    
+                }label: {
+                    Text("Add Task")
+                        .fontWeight(.bold)
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            Capsule()
+                                .fill(.red)
+                        )
+                }
                 
                 Button("Delete"){
                     if let editTask = taskModel.editTask {

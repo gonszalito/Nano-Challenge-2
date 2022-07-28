@@ -8,7 +8,14 @@
 import SwiftUI
 import CoreData
 
+struct weekArray: Identifiable {
+    let id = UUID().uuidString
+    let week: [Date]
+}
+
 class TaskViewModel : ObservableObject{
+    
+    @Environment(\.managedObjectContext) var context
     
     // MARK: New Task Properties
     @Published var taskTitle : String = ""
@@ -16,8 +23,13 @@ class TaskViewModel : ObservableObject{
     @Published var taskDate : Date = Date()
     @Published var taskFinishTime : Date = Date()
     
+    // MARK: All Tasks
+    @Published var allTask : [Task] = []
+    
     // MARK: Tab Bar Index
     @Published var weekIndex : Int = 2
+    
+    @Published var arrAll : [weekArray] = []
     
     // MARK: 3 weeks combined
     @Published var allWeeks : [[Date]] = [[Date()]]
@@ -63,6 +75,7 @@ class TaskViewModel : ObservableObject{
         fetchCurrentWeek()
         fetchPreviousNextWeek()
         appendAllWeek()
+        fetchAllTasks()
 //        fetchPreviousNextWeek()
         //        filterTodayTasks()
     }
@@ -168,7 +181,9 @@ class TaskViewModel : ObservableObject{
         allWeeks.append(previousWeek)
         allWeeks.append(currentWeek)
         allWeeks.append(nextWeek)
-
+        arrAll.append(weekArray(week: previousWeek))
+        arrAll.append(weekArray(week: currentWeek))
+        arrAll.append(weekArray(week: nextWeek))
     }
     
     func fetchPreviousWeek(){
@@ -320,5 +335,29 @@ class TaskViewModel : ObservableObject{
             taskDate = editTask.taskDate ?? Date()
             taskFinishTime = editTask.taskFinishTime ?? Date()
         }
+    }
+    
+    func fetchAllTasks(){
+        
+        
+//        do {
+//            let request = Task.fetchRequest() as NSFetchRequest<Task>
+//            let tasks = try self.context.fetch(request)
+//            self.allTask = tasks
+//
+//        } catch {
+//
+////        }
+////
+//        // Create a fetch request for a specific Entity type
+//        let fetchRequest: NSFetchRequest<Task>
+//        fetchRequest = Task.fetchRequest()
+//
+//        // Get a reference to a NSManagedObjectContext
+//        let context = PersistenceController
+//
+//        // Fetch all objects of one Entity type
+//        let objects = try context.fetch(fetchRequest)
+//        
     }
 }
