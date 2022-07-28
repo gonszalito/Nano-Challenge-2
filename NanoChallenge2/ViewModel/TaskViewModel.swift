@@ -14,9 +14,22 @@ class TaskViewModel : ObservableObject{
     @Published var taskTitle : String = ""
     @Published var taskDescription : String = ""
     @Published var taskDate : Date = Date()
+    @Published var taskFinishTime : Date = Date()
+    
+    // MARK: Determine Task Page Title
+    @Published var taskPageTitle : String = ""
+    
+    // MARK: Edit Finish Time
+    @Published var showFinishPicker: Bool = false
+    
+    // MARK: To open Edit Mode
+    @Published var openEditTask: Bool = false
     
     // MARK: Show Date Picker
     @Published var showDatePicker: Bool = false
+    
+    // MARK: Show Time Picker
+    @Published var showStartPicker: Bool = false
     
     // MARK: Current Week Days
     @Published var currentWeek: [Date] = []
@@ -36,29 +49,45 @@ class TaskViewModel : ObservableObject{
     // MARK: Initializing
     init() {
         fetchCurrentWeek()
-//        filterTodayTasks()
+        //        filterTodayTasks()
     }
     
-//    // MARK: Filtering Today's Tasks
-//    func filterTodayTasks(){
-//        DispatchQueue.global(qos: .userInteractive).async {
-//            
-//            let calendar = Calendar.current
-//            
-//            let filtered = self.storedTasks.filter{
-//                return calendar.isDate($0.taskDate, inSameDayAs: self.currentDate)
-//            }
-//                .sorted {task1, task2 in
-//                    return task2.taskDate < task1.taskDate
-//                }
-//            DispatchQueue.main.async {
-//                withAnimation{
-//                    self.filteredTasks = filtered
-//                }
-//            }
-//            
-//        }
-//    }
+    //    // MARK: Filtering Today's Tasks
+    //    func filterTodayTasks(){
+    //        DispatchQueue.global(qos: .userInteractive).async {
+    //
+    //            let calendar = Calendar.current
+    //
+    //            let filtered = self.storedTasks.filter{
+    //                return calendar.isDate($0.taskDate, inSameDayAs: self.currentDate)
+    //            }
+    //                .sorted {task1, task2 in
+    //                    return task2.taskDate < task1.taskDate
+    //                }
+    //            DispatchQueue.main.async {
+    //                withAnimation{
+    //                    self.filteredTasks = filtered
+    //                }
+    //            }
+    //
+    //        }
+    //    }
+    
+    // MARK:
+    
+    // MARK: Finish Time Observer
+    private func finishObserver() {
+       
+
+            
+    }
+    
+    // MARK: Change Finish Time when lower
+    func changeTime() {
+        if taskDate > taskFinishTime {
+            taskFinishTime = taskDate
+        }
+    }
     
     func fetchCurrentWeek(){
         
@@ -110,10 +139,20 @@ class TaskViewModel : ObservableObject{
     }
     
     func addTask(context : NSManagedObjectContext)->Bool{
-        let task = Task(context: context)
+        
+        // MARK: Updating Existing Data
+        var task : Task!
+        if let editTask = editTask {
+            task = editTask
+        }else{
+            task = Task(context: context)
+        }
+        
         task.taskTitle = taskTitle
         task.taskDescription = taskDescription
         task.taskDate = taskDate
+        task.taskFinishTime = taskFinishTime
+        task.isCompleted = false
         
         if let _ = try? context.save(){
             return true
@@ -123,8 +162,22 @@ class TaskViewModel : ObservableObject{
     
     // MARK: Resetting Data
     func resetTaskData(){
+        showFinishPicker = false
+        editTask = nil
+        taskTitle = ""
         taskTitle = ""
         taskDescription = ""
         taskDate = Date()
+        taskFinishTime = Date()
+    }
+    
+    // MARK: Set Task when editing
+    func setupTask() {
+        if let editTask = editTask {
+            taskTitle = editTask.taskTitle ?? ""
+            taskDescription = editTask.taskDescription ?? ""
+            taskDate = editTask.taskDate ?? Date()
+            taskFinishTime = editTask.taskFinishTime ?? Date()
+        }
     }
 }

@@ -3,11 +3,11 @@
     <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
         <attribute name="checkIn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="checkOut" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="taskDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
+        <attribute name="taskFinishTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="taskTitle" optional="YES" attributeType="String"/>
     </entity>
     <elements>

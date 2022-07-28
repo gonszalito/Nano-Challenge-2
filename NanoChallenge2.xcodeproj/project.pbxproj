@@ -23,6 +23,8 @@
 		4C29262228906FB400A9E517 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C29262128906FB400A9E517 /* HeaderView.swift */; };
 		4C2926242890700600A9E517 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926232890700600A9E517 /* TaskView.swift */; };
 		4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926252890794900A9E517 /* DynamicFilterView.swift */; };
+		4C79810F2891F5DB000BE4BE /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79810E2891F5DB000BE4BE /* PopUpView.swift */; };
+		4C798111289253BC000BE4BE /* TestTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C798110289253BC000BE4BE /* TestTextView.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 		4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */; };
 		4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */; };
@@ -46,6 +48,8 @@
 		4C29262128906FB400A9E517 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		4C2926232890700600A9E517 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		4C2926252890794900A9E517 /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
+		4C79810E2891F5DB000BE4BE /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		4C798110289253BC000BE4BE /* TestTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextView.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewBU.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				4C2926252890794900A9E517 /* DynamicFilterView.swift */,
 				4CF2A70028907EB600B8D1EC /* NewTaskView.swift */,
 				4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */,
+				4C79810E2891F5DB000BE4BE /* PopUpView.swift */,
+				4C798110289253BC000BE4BE /* TestTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 				4C2925E3288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld in Sources */,
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
 				4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */,
+				4C79810F2891F5DB000BE4BE /* PopUpView.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
 				4C2925EA288F904600A9E517 /* HomeView.swift in Sources */,
@@ -238,6 +245,7 @@
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */,
+				4C798111289253BC000BE4BE /* TestTextView.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +388,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = appleAcademy.NanoChallenge2;
+				PRODUCT_BUNDLE_IDENTIFIER = "appleAcademy.NanoChallenge-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -409,7 +417,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = appleAcademy.NanoChallenge2;
+				PRODUCT_BUNDLE_IDENTIFIER = "appleAcademy.NanoChallenge-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
