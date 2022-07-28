@@ -25,6 +25,11 @@
 		4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926252890794900A9E517 /* DynamicFilterView.swift */; };
 		4C79810F2891F5DB000BE4BE /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79810E2891F5DB000BE4BE /* PopUpView.swift */; };
 		4C798111289253BC000BE4BE /* TestTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C798110289253BC000BE4BE /* TestTextView.swift */; };
+		4C79811328928C14000BE4BE /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79811228928C14000BE4BE /* SwiftUIView.swift */; };
+		4C79811528928E75000BE4BE /* BackUpofBu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79811428928E75000BE4BE /* BackUpofBu.swift */; };
+		4C7981172892CB85000BE4BE /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7981162892CB85000BE4BE /* CarouselView.swift */; };
+		4C7981192892D1D1000BE4BE /* CarouselList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7981182892D1D1000BE4BE /* CarouselList.swift */; };
+		4C79811B2892D7C0000BE4BE /* testCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79811A2892D7C0000BE4BE /* testCarousel.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 		4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */; };
 		4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */; };
@@ -50,6 +55,11 @@
 		4C2926252890794900A9E517 /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
 		4C79810E2891F5DB000BE4BE /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		4C798110289253BC000BE4BE /* TestTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextView.swift; sourceTree = "<group>"; };
+		4C79811228928C14000BE4BE /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		4C79811428928E75000BE4BE /* BackUpofBu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackUpofBu.swift; sourceTree = "<group>"; };
+		4C7981162892CB85000BE4BE /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		4C7981182892D1D1000BE4BE /* CarouselList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselList.swift; sourceTree = "<group>"; };
+		4C79811A2892D7C0000BE4BE /* testCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCarousel.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskView.swift; sourceTree = "<group>"; };
 		4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewBU.swift; sourceTree = "<group>"; };
@@ -122,6 +132,7 @@
 			children = (
 				4CF2A7042891558200B8D1EC /* BackUpViews */,
 				4C29261B2890356200A9E517 /* BackUp.swift */,
+				4C79811428928E75000BE4BE /* BackUpofBu.swift */,
 				4C29262028906FAA00A9E517 /* Components */,
 				4C2925E9288F904600A9E517 /* HomeView.swift */,
 				4C2926252890794900A9E517 /* DynamicFilterView.swift */,
@@ -129,6 +140,9 @@
 				4CF2A7022890986F00B8D1EC /* CreateNewTaskView.swift */,
 				4C79810E2891F5DB000BE4BE /* PopUpView.swift */,
 				4C798110289253BC000BE4BE /* TestTextView.swift */,
+				4C79811228928C14000BE4BE /* SwiftUIView.swift */,
+				4C7981162892CB85000BE4BE /* CarouselView.swift */,
+				4C79811A2892D7C0000BE4BE /* testCarousel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF2A7052891559200B8D1EC /* NewTaskViewBU.swift */,
+				4C7981182892D1D1000BE4BE /* CarouselList.swift */,
 			);
 			path = BackUpViews;
 			sourceTree = "<group>";
@@ -230,6 +245,7 @@
 			files = (
 				4C2925E3288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld in Sources */,
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
+				4C7981172892CB85000BE4BE /* CarouselView.swift in Sources */,
 				4CF2A7062891559200B8D1EC /* NewTaskViewBU.swift in Sources */,
 				4C79810F2891F5DB000BE4BE /* PopUpView.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
@@ -242,7 +258,11 @@
 				4C29262228906FB400A9E517 /* HeaderView.swift in Sources */,
 				4C29261A288FD20300A9E517 /* Helper.swift in Sources */,
 				4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */,
+				4C79811328928C14000BE4BE /* SwiftUIView.swift in Sources */,
+				4C7981192892D1D1000BE4BE /* CarouselList.swift in Sources */,
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
+				4C79811528928E75000BE4BE /* BackUpofBu.swift in Sources */,
+				4C79811B2892D7C0000BE4BE /* testCarousel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4CF2A7032890986F00B8D1EC /* CreateNewTaskView.swift in Sources */,
 				4C798111289253BC000BE4BE /* TestTextView.swift in Sources */,

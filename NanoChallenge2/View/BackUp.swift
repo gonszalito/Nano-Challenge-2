@@ -11,93 +11,202 @@ struct TestView: View {
     @StateObject var taskModel : TaskViewModel = TaskViewModel()
     @Namespace var animation
     
+    @State private var index = 2
+    
     // MARK: Core Date Context
     @Environment(\.managedObjectContext) var context
     @Environment(\.self) var env
     
     var body: some View {
-        ScrollView(.vertical,showsIndicators: false){
+        
+        VStack {
             
-            // MARK: Lazy Stack with Header
-            LazyVStack(spacing: 25, pinnedViews: [.sectionHeaders]) {
-                
-                Section {
-                    
-                    // MARK: Current  Week View
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing : 10){
-                            ForEach(taskModel.currentWeek,id: \.self) { day in
-                                
-                                VStack(spacing : 10){
-                                    Text(taskModel.extractDate(date: day, format: "EEE"))
-                                        .font(.system(size:14))
-                                        .fontWeight(.semibold)
-                                    
-                                    Text(taskModel.extractDate(date: day, format: "dd"))
-                                        .font(.system(size:14))
-                                    
-                                    Circle()
-                                        .fill(.white)
-                                        .frame(width: 8, height: 8)
-                                        .opacity(taskModel.isToday(date: day) ? 1 : 0)
-                                }
-                                // MARK: Foreground Style
-                                .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
-                                .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
-                                // MARK: Capsule Shape
-                                .frame(width: 45, height: 90)
-                                .background(
-                                    ZStack{
-                                        // MARK:
-                                        if taskModel.isToday(date: day){
-                                            Capsule()
-                                                .fill(.black)
-                                                .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
-                                        }
-                                        
-                                        
-                                    }
-                                )
-                                .contentShape(Capsule())
-                                .onTapGesture {
-                                    // Updating Current Day
-                                    withAnimation{
-                                        taskModel.currentDate = day
-                                    }
-                                }
-                                
-                            }
-                        }
+            VStack {
+                HStack(spacing: 10){
+                    VStack(alignment: .leading) {
+                        
+                        //                Text(Date().formatted(date : .abbreviated, time: .omitted))
+                        //                    .foregroundColor(.gray)
+                        
+                        // MARK: Title and plus
+                        //                        Button {
+                        //
+                        //                        } label: {
+                        Text(Date().formatted(date : .abbreviated, time: .omitted))
+                            .font(.title.bold())
+                            .tint(.black)
+                        //                        }
+                        
+                        //                                                ZStack {
+                        //                                                    DatePicker("label", selection: $taskModel.taskDate, displayedComponents: [.date])
+                        //                                                        .datePickerStyle(CompactDatePickerStyle())
+                        //                                                        .labelsHidden()
+                        //                                                        .hTrailing()
+                        //                                                    Button {
+                        //
+                        //                                                    } label: {
+                        //                                                        Text(Date().formatted(date : .abbreviated, time: .omitted))
+                        //                                                            .font(.title.bold())
+                        //                                                            .tint(.black)
+                        //                                                    }
+                        //                                                        .userInteractionDisabled()
+                        //                                                        .border(.red)
+                        //                                                }
+                        //                                                .frame(width: 32, height: 32, alignment: .trailing)
+                        //
+                        //
+                        
+                        
+                    }
+                    //                    .frame(alignment: .center)
+                    .hLeading()
+                    Button {
+                        taskModel.fetchNextWeek()
+                    } label: {
+                        Image(systemName: "pencil")
+                            .tint(.black)
+                            .font(.system(size: 28))
                     }
                     
+                    Button {
+                        taskModel.addNewTask.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                            .tint(.black)
+                            .font(.system(size: 28))
+                    }
                     
-                    TasksView()
-                    NewTasksView().padding(.horizontal,10)
-                    
-                    
-                } header: {
-                    HeaderView()
                 }
+                .padding()
+                .padding(.bottom,10)
+                .padding(.top,getSafeArea().top)
+                //                .background(.red)
+                .cornerRadius(30)
+//                WeekCardView(week: taskModel.previousWeek)
                 
+                ACarousel(taskModel.allWeeks) { week in
+                    
+                    WeekCardView(week: week)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 300)
+                        .cornerRadius(30)
+                }
+                .frame(height: 300)
+                
+//                VStack {
+//                    TabView(selection: $taskModel.weekIndex) {
+//                        WeekCardView(week: taskModel.previousWeek)
+//                                .tag(1)
+//                                .border(.blue)
+//
+//                        WeekCardView(week: taskModel.currentWeek)
+//                                .tag(2)
+//
+//                        WeekCardView(week: taskModel.nextWeek)
+//                                .tag(3)
+//
+////                        ForEach(taskModel.allWeeks, id: \.self) { week in
+////
+////                            WeekCardView(week: week)
+////                                .tag(week)
+////                        }
+//
+//
+//                    }
+//                    .frame(height: 100, alignment: .center)
+//                    .onChange(of: taskModel.weekIndex) { _ in
+////                        taskModel.refreshWeek()
+////                        if taskModel.currentWeek == taskModel.nextWeek {
+////                            taskModel.weekIndex = 2
+////                        }
+////                        taskModel.weekIndex = 2
+////
+////                        if taskModel.weekIndex != 2 {
+////                            withAnimation {
+////                                taskModel.weekIndex = 2
+////                            }
+////                        }
+////                        if taskModel.weekIndex == 3 {
+////                            taskModel.weekIndex = 2
+////                        } else if taskModel.weekIndex == 1 {
+////                            taskModel.weekIndex = 2
+////                        }
+//                }
+//                }.border(.black)
+//                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//                        .accentColor(.orange)
+//                        .onChange(of: selectedItem) { value in print("selected tab = \(value)") }
+                
+//                TabView(selection: $index) {
+//                    ForEach(taskModel.allWeeks, id: \.self) { week in
+//                             WeekCardView(week: week)
+////                        CardView()
+//
+//                         }
+//
+//                     }
+//                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                     
+                
+                // MARK: Week View
+//                HStack(spacing : 10){
+//                    ForEach(taskModel.currentWeek,id: \.self) { day in
+//
+//                        VStack(spacing : 10){
+//                            Text(taskModel.extractDate(date: day, format: "EEE"))
+//                                .font(.system(size:14))
+//                                .fontWeight(.semibold)
+//
+//                            Text(taskModel.extractDate(date: day, format: "dd"))
+//                                .font(.system(size:14))
+//
+//                            Circle()
+//                                .fill(.white)
+//                                .frame(width: 8, height: 8)
+//                                .opacity(taskModel.isToday(date: day) ? 1 : 0)
+//                        }
+//                        // MARK: Foreground Style
+//                        .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
+//                        .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
+//                        // MARK: Capsule Shape
+//                        .frame(width: 45, height: 90)
+//                        .background(
+//                            ZStack{
+//                                // MARK:
+//                                if taskModel.isToday(date: day){
+//                                    Capsule()
+//                                        .fill(.black)
+//                                        .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+//                                }
+//
+//
+//                            }
+//                        )
+//                        .contentShape(Capsule())
+//                        .onTapGesture {
+//                            // Updating Current Day
+//                            withAnimation{
+//                                taskModel.currentDate = day
+//                            }
+//                        }
+//
+//                    }
+//                }
+//                .frame(maxWidth: .infinity, alignment: .center)
+                
+                ScrollView(.vertical,showsIndicators: false) {
+                    VStack{
+                        NewTasksView().padding(.horizontal,10)
+                    }
+                }
             }
-            
-        }.ignoresSafeArea(.container,edges: .top)
-        
-        // MARK: Floating Add Button
-        //            .overlay(
-        //                Button(action: {
-        //                    taskModel.addNewTask.toggle()
-        //                }, label: {
-        //                    Image(systemName: "plus")
-        //                        .foregroundColor(.white)
-        //                        .padding()
-        //                        .background(Color.black, in: Circle())
-        //                }).toBot()
-        //            )
+            .ignoresSafeArea(.container,edges: .top)
+            .frame(maxHeight : .infinity, alignment: .top)
             .sheet(isPresented: $taskModel.addNewTask) {
                 // Clearing Edit Data
                 taskModel.resetTaskData()
-//                taskModel.editTask = nil
+                //                taskModel.editTask = nil
             } content : {
                 NewTaskView()
                     .environmentObject(taskModel)
@@ -108,8 +217,56 @@ struct TestView: View {
                 NewTaskView()
                     .environmentObject(taskModel)
             }
-        
+        }
     }
+    
+    func WeekCardView(week : [Date])->some View{
+        HStack{
+            ForEach(week,id: \.self) { day in
+                
+                VStack(spacing : 10){
+                    Text(taskModel.extractDate(date: day, format: "EEE"))
+                        .font(.system(size:14))
+                        .fontWeight(.semibold)
+                    
+                    Text(taskModel.extractDate(date: day, format: "dd"))
+                        .font(.system(size:14))
+                    
+//                    Circle()
+//                        .fill(.white)
+//                        .frame(width: 8, height: 8)
+//                        .opacity(taskModel.isToday(date: day) ? 1 : 0)
+                }
+                // MARK: Foreground Style
+                .foregroundStyle(taskModel.isToday(date: day) ? .primary : .secondary)
+                .foregroundColor(taskModel.isToday(date: day) ? .white : .black)
+                // MARK: Capsule Shape
+                .frame(width: 45, height: 90)
+                .background(
+                    ZStack{
+                        // MARK:
+                        if taskModel.isToday(date: day){
+                            Capsule()
+                                .fill(.black)
+                                .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
+                        }
+                        
+                        
+                    }
+                )
+                .contentShape(Capsule())
+                .onTapGesture {
+                    // Updating Current Day
+                    withAnimation{
+                        taskModel.currentDate = day
+                    }
+                }
+                
+            }
+            .frame(maxWidth : .infinity)
+        }
+    }
+    
     
     // MARK: Tasks View
     func TasksView()-> some View {
@@ -202,6 +359,7 @@ struct TestView: View {
                     Text(task.taskDate?.formatted(date: .omitted, time: .shortened) ?? "")
                     
                 }
+                Spacer()
                 
                 
                 if taskModel.isCurrentHour(date: task.taskDate ?? Date()){
@@ -237,22 +395,22 @@ struct TestView: View {
                 }
                 
             }
-//            .fullScreenCover(isPresented: $taskModel.addNewTask) {
-//                taskModel.resetTaskData()
-//
-//            } content : {
-//                NewTaskView().environmentObject(taskModel)
-//            }
-//            .foregroundColor(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? .white : .black)
-//            .padding(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 15:0)
-//            .padding(.bottom,taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 0 : 10)
-//            .hLeading()
-//            .background(
-//                Color(UIColor.black)
-//                    .cornerRadius(25)
-//                    .opacity(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 1 : 0)
-//            )
-//
+            //            .fullScreenCover(isPresented: $taskModel.addNewTask) {
+            //                taskModel.resetTaskData()
+            //
+            //            } content : {
+            //                NewTaskView().environmentObject(taskModel)
+            //            }
+            //            .foregroundColor(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? .white : .black)
+            //            .padding(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 15:0)
+            //            .padding(.bottom,taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 0 : 10)
+            //            .hLeading()
+            //            .background(
+            //                Color(UIColor.black)
+            //                    .cornerRadius(25)
+            //                    .opacity(taskModel.isCurrentHour(date: task.taskDate ?? Date()) ? 1 : 0)
+            //            )
+            //
             
         }
         .hLeading()
@@ -262,31 +420,33 @@ struct TestView: View {
     
     // MARK: Header
     func HeaderView()->some View {
-        
-        HStack(spacing: 10){
-            
-            VStack(alignment: .leading, spacing: 10) {
+        VStack {
+            HStack(spacing: 10){
                 
-                Text(Date().formatted(date : .abbreviated, time: .omitted))
-                    .foregroundColor(.gray)
+                VStack(alignment: .leading, spacing: 10) {
+                    
+                    Text(Date().formatted(date : .abbreviated, time: .omitted))
+                        .foregroundColor(.gray)
+                    
+                    Text(Date().formatted(date : .abbreviated, time: .omitted))
+                        .font(.largeTitle.bold())
+                    
+                    
+                }
+                .hLeading()
                 
-                Text(Date().formatted(date : .abbreviated, time: .omitted))
-                    .font(.largeTitle.bold())
+          
+                
             }
-            .hLeading()
+            .padding()
+            .padding(.bottom,10)
+            .padding(.top,getSafeArea().top)
+            //            .background(.red)
+            .cornerRadius(30)
             
-            Button {
-                taskModel.addNewTask.toggle()
-            } label: {
-                Image(systemName: "plus")
-                    .tint(.black)
-                    .font(.system(size: 30))
-            }
             
         }
-        .padding()
-        .padding(.top,getSafeArea().top)
-        .background(.white)
+        
     }
     
     // MARK: TaskView
@@ -312,9 +472,9 @@ struct TestView: View {
                     .font(.system(size:14))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-//                    .background(.green)
+                //                    .background(.green)
                     .cornerRadius(20)
-//                    .font(.callout)
+                //                    .font(.callout)
                     .padding(.vertical,5)
                     .padding(.horizontal)
                     .background{
@@ -322,10 +482,10 @@ struct TestView: View {
                             .fill(.gray.opacity(0.3))
                     }
                 
-
+                
                 Spacer()
                 
-               //  MARK: Edit Button Only for Non Completed Tasks
+                //  MARK: Edit Button Only for Non Completed Tasks
                 if !task.isCompleted{
                     Button{
                         taskModel.editTask = task
@@ -335,7 +495,7 @@ struct TestView: View {
                         Image(systemName: "square.and.pencil")
                             .foregroundColor(.white)
                     }
-
+                    
                 }
             }
             .hLeading()
@@ -353,7 +513,7 @@ struct TestView: View {
                 .fill(.black)
         }
     }
-        
+    
 }
 
 
