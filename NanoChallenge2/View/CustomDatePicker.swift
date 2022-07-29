@@ -123,6 +123,7 @@ struct CustomDatePicker: View {
                     Text("\(value.day)")
                         .font(.title3.bold())
                         .foregroundColor(isSameDay(date1: task.taskDate ?? Date(), date2: currentDate) ? .white : .primary)
+                        .frame(height:30,alignment: .top)
                         .frame(maxWidth: .infinity)
                     
                     Circle()
@@ -139,9 +140,10 @@ struct CustomDatePicker: View {
                 }
                 
             }
+            
         }
         .padding(.vertical,8)
-        .frame(height: 60, alignment: .top)
+//        .frame(height: 30, alignment: .top)
     }
     
     // checking dates

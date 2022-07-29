@@ -20,8 +20,25 @@ class TaskViewModel : ObservableObject{
     // MARK: New Task Properties
     @Published var taskTitle : String = ""
     @Published var taskDescription : String = ""
+    
+    // MARK: Start Time/ Deadline
     @Published var taskDate : Date = Date()
     @Published var taskFinishTime : Date = Date()
+    
+    @Published var inStatus : Bool = false
+    @Published var outStatus : Bool = false
+    
+    @Published var isCompleted : Bool = false
+    
+    // MARK: Check In Check Out
+    @Published var checkIn : Date = Date()
+    @Published var checkOut: Date = Date()
+    
+    @Published var timeTolerance : TimeInterval = 600
+    
+    @Published var started : Bool = false
+    @Published var finished : Bool = false
+    
     
     // MARK: All Tasks
     @Published var allTask : [Task] = []
@@ -39,6 +56,8 @@ class TaskViewModel : ObservableObject{
     
     // MARK: Edit Finish Time
     @Published var showFinishPicker: Bool = false
+    
+    @Published var showSetTimePicker : Bool = false
     
     // MARK: To open Edit Mode
     @Published var openEditTask: Bool = false
@@ -103,6 +122,11 @@ class TaskViewModel : ObservableObject{
     
     // MARK:
     
+    func fetchAll() {
+        fetchCurrentWeek()
+   
+    }
+    
     // MARK: Finish Time Observer
     private func finishObserver() {
        
@@ -120,6 +144,32 @@ class TaskViewModel : ObservableObject{
     func fetchCurrentWeek(){
         
         let today = Date()
+        var calendar = Calendar(identifier: .gregorian)
+//        calendar.locale = Locale(identifier: "en_US")
+        
+//        Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 7
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
+//        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
+//
+//        let week = calendar.dateInterval(of: .weekOfMonth, for: today)
+//
+//        guard let firstWeekDay = week?.start else {
+//            return
+//        }
+        
+        (1...7).forEach{ day in
+            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
+                currentWeek.append(weekday)
+            }
+            
+        }
+        
+    }
+    
+    func fetchWeek(){
+        currentWeek.removeAll()
+        let today = currentDate
         var calendar = Calendar(identifier: .gregorian)
 //        calendar.locale = Locale(identifier: "en_US")
         
@@ -185,6 +235,8 @@ class TaskViewModel : ObservableObject{
         arrAll.append(weekArray(week: currentWeek))
         arrAll.append(weekArray(week: nextWeek))
     }
+    
+
     
     func fetchPreviousWeek(){
         currentWeek.removeAll()
@@ -325,6 +377,10 @@ class TaskViewModel : ObservableObject{
         taskDescription = ""
         taskDate = Date()
         taskFinishTime = Date()
+        started = false
+        finished = false
+        inStatus = false
+        outStatus = false
     }
     
     // MARK: Set Task when editing
@@ -334,6 +390,14 @@ class TaskViewModel : ObservableObject{
             taskDescription = editTask.taskDescription ?? ""
             taskDate = editTask.taskDate ?? Date()
             taskFinishTime = editTask.taskFinishTime ?? Date()
+            finished = editTask.outStatus
+            started = editTask.inStatus
+            isCompleted = editTask.isCompleted
+            checkIn = editTask.checkIn ?? Date()
+            checkOut = editTask.checkOut ?? Date()
+            inStatus = editTask.inStatus
+            outStatus = editTask.outStatus
+            
         }
     }
     
@@ -360,4 +424,78 @@ class TaskViewModel : ObservableObject{
 //        let objects = try context.fetch(fetchRequest)
 //        
     }
+    
+    func completeTask()->Bool{
+        if started == false {
+            started.toggle()
+            checkIn = Date()
+            return false
+        } else if finished == false {
+            finished.toggle()
+            checkOut = Date()
+            return true
+        } else {
+            return true
+        }
+        
+    }
+
+    func completingTask(context : NSManagedObjectContext)->Bool{
+        // MARK: Updating Existing Data
+        var task : Task!
+        if let editTask = editTask {
+            task = editTask
+        }else{
+            task = Task(context: context)
+        }
+        
+        if  started == false {
+            started.toggle()
+            task.checkIn = Date()
+            task.inStatus = getInStatus(time: task.checkIn ?? Date())
+            if let _ = try? context.save(){
+                return false
+            }
+            return false
+        } else if finished == false {
+            finished.toggle()
+            task.checkOut = Date()
+            task.outStatus = getOutStatus(time: task.checkOut ?? Date())
+            if let _ = try? context.save(){
+                return true
+            }
+            return true
+        }
+        
+     
+        
+      return true
+    }
+    
+    func getInStatus(time: Date)->Bool{
+        // MARK: Updating Existing Data
+        
+        if (time.timeIntervalSinceReferenceDate - taskDate.timeIntervalSinceReferenceDate) > timeTolerance {
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
+    func getOutStatus(time: Date)->Bool{
+            
+        if (time.timeIntervalSinceReferenceDate - taskFinishTime.timeIntervalSinceReferenceDate) < timeTolerance {
+            return true
+        } else {
+            return false
+        }
+            
+    }
+    
+    func editTime() {
+        resetTaskData()
+        
+    }
+    
 }
