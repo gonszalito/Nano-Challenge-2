@@ -93,12 +93,8 @@ struct CustomDatePicker: View {
                         }
                 }
             }
-            
-//            VStack(spacing :15) {
-//                Text("Tasks")
-//                    .font(.title2.bold())
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//            }
+
+
             .padding()
             .padding(.top,20)
         }
@@ -108,7 +104,7 @@ struct CustomDatePicker: View {
             // updating month
             currentDate = getCurrentMonth()
         }
-        // Dates
+        
         
     
     }
@@ -202,22 +198,20 @@ struct CustomDatePicker: View {
     
 }
 
-//
-//extension Date{
-//    func getAllDates() -> [Date]{
-//        let calendar = Calendar.current
-////        let range = calendar.range(of: .day, in: .month, for: self)!
-//        
-//        // getting start Date...
-//        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-//        
-//        let range = calendar.range(of: .day, in: .month, for: startDate)!
-//     
-//        return range.compactMap( { day -> Date in
-//            
-//            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
-//            
-//        })
-//        
-//    }
-//}
+
+extension Date{
+    func getAllDates() -> [Date]{
+        let calendar = Calendar.current
+
+        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
+        
+        let range = calendar.range(of: .day, in: .month, for: startDate)!
+     
+        return range.compactMap( { day -> Date in
+            
+            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
+            
+        })
+        
+    }
+}

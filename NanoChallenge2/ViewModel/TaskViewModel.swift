@@ -295,28 +295,7 @@ class TaskViewModel : ObservableObject{
     }
     
     
-//    func fetchNextWeek(day: Date){
-//
-//        let today = Date()
-//        let calendar = Calendar.current.firstWeekday
-//
-//        let week = calendar.dateInterval(of: .weekOfMonth, for: today)
-//
-//        guard let firstWeekDay = week?.start else {
-//            return
-//        }
-//
-//        (1...7).forEach{ day in
-//            if let weekday = calendar.date(byAdding: .day, value: day, to: firstWeekDay){
-//                currentWeek.append(weekday)
-//            }
-//
-//        }
-//        calendar.
-//
-//    }
-//
-//
+
     // MARK: Extracting Date
     func extractDate(date: Date,format: String)->String{
         let formatter = DateFormatter()
@@ -404,25 +383,6 @@ class TaskViewModel : ObservableObject{
     func fetchAllTasks(){
         
         
-//        do {
-//            let request = Task.fetchRequest() as NSFetchRequest<Task>
-//            let tasks = try self.context.fetch(request)
-//            self.allTask = tasks
-//
-//        } catch {
-//
-////        }
-////
-//        // Create a fetch request for a specific Entity type
-//        let fetchRequest: NSFetchRequest<Task>
-//        fetchRequest = Task.fetchRequest()
-//
-//        // Get a reference to a NSManagedObjectContext
-//        let context = PersistenceController
-//
-//        // Fetch all objects of one Entity type
-//        let objects = try context.fetch(fetchRequest)
-//        
     }
     
     func completeTask()->Bool{
