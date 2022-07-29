@@ -322,51 +322,7 @@ struct NewTaskView: View {
             }
             .frame(maxHeight : .infinity, alignment: .bottom)
             
-            //            HStack{
-            //                VStack {
-            //                    Text("Check In")
-            //                        .font(.caption)
-            //                        .foregroundStyle(.primary)
-            //                        .padding(.bottom,5)
-            //                    Text($taskModel.taskDate.formatted(date : .omitted, time: .shortened))
-            //
-            //                    Text("Failed")
-            //                        .font(.caption)
-            //                        .frame(width: 70, height: 15)
-            //                        .padding()
-            //                        .background(.green)
-            //                        .cornerRadius(20)
-            //
-            //                }
-            //                .foregroundColor(.white)
-            //                .frame(maxWidth : .infinity, alignment: .center)
-            //
-            //                VStack {
-            //                    Text("Check out")
-            //                        .font(.caption)
-            //                        .foregroundStyle(.primary)
-            //                        .padding(.bottom,5)
-            ////                    Text(taskDate.formatted(date : .omitted, time: .shortened))
-            //                    Text("--:--")
-            //                    Text("Completed")
-            //                        .font(.caption)
-            //                        .frame(width: 70, height: 15)
-            //                        .padding()
-            //                        .background(.green)
-            //                        .cornerRadius(20)
-            //                }
-            //                .foregroundColor(.white)
-            //                .frame(maxWidth : .infinity, alignment: .center)
-            //
-            //
-            //            }
-            //            .padding(.vertical,10)
-            //            .background(.gray)
-            //            .cornerRadius(20)
-            //
-            //        }
-            //        .frame(maxHeight: .infinity, alignment : .top)
-            //        .padding()
+            
             
             
         }
@@ -427,7 +383,7 @@ struct NewTaskView: View {
               
                     }
                 }
-            }
+            
             .animation(.easeInOut, value: taskModel.showSetTimePicker)
             
             // MARK: Date Picker
@@ -502,12 +458,12 @@ struct NewTaskView: View {
                     
                 }
                  
-            }
+            } .frame(maxHeight: .infinity)
            
             .animation(.easeInOut, value: taskModel.showFinishPicker)
             
         }
-        
+    }
     }
     
 

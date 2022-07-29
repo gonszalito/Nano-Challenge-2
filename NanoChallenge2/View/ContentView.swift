@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var currentIndex: Int = 0
     
     var body: some View {
-       TestView()
+       HomeView()
     }
 }
 
