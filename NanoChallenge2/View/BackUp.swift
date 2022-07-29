@@ -28,16 +28,13 @@ struct TestView: View {
                 HStack(spacing: 10){
                     VStack(alignment: .leading) {
                         
-                        //                Text(Date().formatted(date : .abbreviated, time: .omitted))
-                        //                    .foregroundColor(.gray)
-                        
+        
                         // MARK: Title and plus
-                        //                        Button {
-                        //
-                        //                        } label: {
+                    
                         Text(Date().formatted(date : .abbreviated, time: .omitted))
                             .font(.title.bold())
                             .tint(.black)
+                            .hLeading()
                         //                        }
                         
                         //                                                ZStack {
@@ -63,47 +60,44 @@ struct TestView: View {
                     }
                     //                    .frame(alignment: .center)
                     .hLeading()
-                    
-                    Button {
-                        stopAnimation()
-
-                        
-                    } label: {
-                        Image(systemName: "circle")
-                            .tint(.black)
-                            .font(.system(size: 28))
-                            .ignoresSafeArea()
-                        
                    
-                    }
-                    
-                    Button {
-                        startAnimation()
+                    HStack {
                         
-                    } label: {
-                        Image(systemName: "calendar")
-                            .tint(.black)
-                            .font(.system(size: 28))
-                            .ignoresSafeArea()
-                        
-                   
-                    }
+                        Button {
+                            if !animatedStates[0] {
+                                startAnimation()
+                            }else{
+                                stopAnimation()
+                            }
+                            
+                            
+                        } label: {
+                            Image(systemName: "calendar")
+                                .tint(.black)
+                                .font(.system(size: 28))
+                                .ignoresSafeArea()
+                            
+                       
+                        }  .frame(maxWidth:.infinity, alignment: .leading)
+           
                     
                     Button {
                         taskModel.fetchPreviousWeek()
                     } label: {
-                        Image(systemName: "circle")
+                        Image(systemName: "chevron.left")
                             .tint(.black)
                             .font(.system(size: 28))
-                    }
+                    }.hLeading()
+                        
+                     
                     
                     Button {
                         taskModel.fetchNextWeek()
                     } label: {
-                        Image(systemName: "pencil")
+                        Image(systemName: "chevron.right")
                             .tint(.black)
                             .font(.system(size: 28))
-                    }
+                    }.hLeading()
                     
                     Button {
                         taskModel.addNewTask.toggle()
@@ -112,7 +106,8 @@ struct TestView: View {
                             .tint(.black)
                             .font(.system(size: 28))
                     }
-                    
+                    }
+                    .hTrailing()
                 }
                 .padding()
                 .padding(.bottom,10)
@@ -245,7 +240,7 @@ struct TestView: View {
                     }
                    
                 }
-                
+                .opacity(animatedStates[0] ? 0 : 1)
                 .background(
                     Rectangle()
                         .fill(.clear)
@@ -259,9 +254,13 @@ struct TestView: View {
                         CustomDatePicker( taskModel: taskModel, currentDate: $taskModel.currentDate)
                             .background(
                                 RoundedRectangle(cornerRadius: 30,style: .continuous)
-                                    .fill(Color.red)
+                                    .fill(.clear)
                                     .matchedGeometryEffect(id: "DATEVIEW", in: animation)
                             )
+                            .onChange(of: taskModel.currentDate, perform: { _ in
+//                                stopAnimation()
+                                taskModel.fetchWeek()
+                            })
                     }
                     
           
@@ -461,9 +460,8 @@ struct TestView: View {
                         if !task.isCompleted{
                             // MARK: Check Button
                             Button {
-                                //Updating Status
-                                task.isCompleted.toggle()
-                                
+                        
+                               
                                 //Saving
                                 try? env.managedObjectContext.save()
                             } label: {
@@ -552,58 +550,173 @@ struct TestView: View {
     @ViewBuilder
     func TaskRowView(task: Task)->some View {
         VStack(alignment:.leading, spacing: 10){
+            
+            Text("\(task.taskDate!, style: .time) - \(task.taskFinishTime!, style: .time)  ")
+                .font(.body)
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+            //                    .background(.green)
+                .cornerRadius(20)
+            //                    .font(.callout)
+                .padding(.vertical,5)
+//                            .padding(.horizontal)
+                .frame(maxWidth:.infinity)
+                .background(
+                    
+                    Capsule()
+                        .foregroundColor(.gray.opacity(0.3))
+//                        .background(.gray.opacity(0.3))
+                )
+            
             HStack{
-                Text("11:00 AM - 12:00 AM")
-                    .font(.system(size:14))
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                //                    .background(.green)
-                    .cornerRadius(20)
-                //                    .font(.callout)
-                    .padding(.vertical,5)
-                    .padding(.horizontal)
-                    .background{
-                        Capsule()
-                            .fill(.gray.opacity(0.3))
-                    }
+//                if let date = task.taskDate {
+//                    Text(date, style: .time)
+//                        .font(.system(size:14))
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(.white)
+//                        .cornerRadius(20)
+//                        .padding(.vertical,5)
+//                        .padding(.horizontal)
+//                        .background{
+//                            Capsule()
+//                                .fill(.gray.opacity(0.3))
+//                        }
+//                }
+                Text(task.taskTitle ?? "")
+                    .font(.title2.bold())
+                    .foregroundColor(.black)
+                .padding(.vertical,10)
+            
                 
                 
                 Spacer()
                 
                 //  MARK: Edit Button Only for Non Completed Tasks
-                if !task.isCompleted{
-                    Button{
-                        taskModel.editTask = task
-                        taskModel.openEditTask = true
-                        taskModel.setupTask()
-                    }label: {
-                        Image(systemName: "square.and.pencil")
-                            .foregroundColor(.white)
-                    }
-                    
-                }
+//                VStack{
+////                if !task.isCompleted{
+////                    Button{
+////                        taskModel.editTask = task
+////                        taskModel.openEditTask = true
+////                        taskModel.setupTask()
+////                    }label: {
+////                        Image(systemName: "square.and.pencil")
+////                            .foregroundColor(.black)
+////                    }
+////
+////
+////
+////
+////                }
+//
+//                }
             }
             .hLeading()
             
-            Text(task.taskTitle ?? "")
-                .font(.title2.bold())
-                .foregroundColor(.white)
-                .padding(.vertical,10)
+          
+            
+            HStack {
+      
+                VStack {
+                    if let checkIn = task.checkIn {
+                        Text("In : \(checkIn, style: .time)")
+
+                            .font(.system(size:14))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        //                    .background(.green)
+                            .cornerRadius(20)
+                        //                    .font(.callout)
+                            .padding(.vertical,5)
+//                            .padding(.horizontal)
+                            .frame(maxWidth:.infinity)
+                            .background{
+                                Capsule()
+                                    .fill(task.inStatus ? Color("LightGreen") : Color("LightRed")  )
+                    }
+                   
+                            
+                    }
+ 
+                    
+                }
+                .frame(maxWidth:.infinity)
+                
+                VStack {
+                    if let checkOut = task.checkOut {
+                        Text("Out  : \(checkOut, style: .time)")
+
+                            .font(.system(size:14))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        //                    .background(.green)
+                            .cornerRadius(20)
+                        //                    .font(.callout)
+                            .padding(.vertical,5)
+//                            .padding(.horizontal)
+                            .frame(maxWidth:.infinity)
+                            .background{
+                                Capsule()
+                                Capsule()
+                                    .fill(task.outStatus ? Color("LightGreen") : Color("LightRed")  )
+                    }
+                            
+                    }
+                }
+                .frame(maxWidth:.infinity)
+                
+                if !task.isCompleted{
+             
+                    Button {
+                        //Updating Status
+                        taskModel.editTask = task
+                        
+                        if taskModel.completingTask(context: env.managedObjectContext){
+                            task.isCompleted.toggle()
+                            taskModel.resetTaskData()
+                        }
+                        
+                   
+                    } label: {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.black)
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(.white)
+  
+                                    
+                            )
+                    }.hTrailing()
+                }
+            }
+            .frame(alignment: .center)
+            
+           
             
         }
+      
         .padding()
         .frame(maxWidth:.infinity)
         .background{
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(.black)
+                .foregroundColor(Color("LightBlue"))
+                .shadow( radius: 4, x: 3, y: 4)
+                
+        }
+        .onTapGesture {
+            taskModel.editTask = task
+            taskModel.openEditTask = true
+            taskModel.setupTask()
+
         }
     }
+    
     
     
     func startAnimation(){
         // MARK: Displaying Splash Icon for Some Time
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
             // your code here
             withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.7, blendDuration: 0.7)){
                 animatedStates[0] = true
@@ -623,7 +736,7 @@ struct TestView: View {
     func stopAnimation(){
         // MARK: Displaying Splash Icon for Some Time
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() ) {
             // your code here
             withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.7, blendDuration: 0.7)){
                 animatedStates[0] = false

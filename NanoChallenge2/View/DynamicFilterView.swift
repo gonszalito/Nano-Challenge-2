@@ -39,8 +39,8 @@ struct DynamicFilterView<Content: View,T>: View where T : NSManagedObject{
     var body: some View {
         Group {
             if request.isEmpty{
-                Text("No tasks found")
-                    .font(.system(size:16))
+                Text("No tasks Available")
+                    .font(.title.bold())
                     .fontWeight(.light)
                     .offset(y: 100)
             }else {
