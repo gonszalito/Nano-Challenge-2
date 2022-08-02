@@ -168,7 +168,7 @@ struct HomeView: View {
                         // MARK: Home View
 //                        DatePicker.init("",selection: $taskModel.currentDate,displayedComponents: [.date])
 //                            .datePickerStyle(.graphical)
-////                        CustomDatePicker( taskModel: taskModel, currentDate: $taskModel.currentDate)
+////
 //                            .background(
 //                                RoundedRectangle(cornerRadius: 30,style: .continuous)
 //                                    .fill(.clear)
@@ -176,7 +176,10 @@ struct HomeView: View {
 //                            )
 //                            .onChange(of: taskModel.currentDate, perform: { _ in
 //                                taskModel.fetchWeek()
-//                            })
+//                        })
+                        
+//                        CustomDatePicker( taskModel: taskModel, currentDate: $taskModel.currentDate)
+                        
                         CustomWeekView(taskModel: self.taskModel, currentDate: $taskModel.currentDate)
                     }
                     

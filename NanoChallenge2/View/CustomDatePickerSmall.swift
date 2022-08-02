@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomDatePicker: View {
+struct CustomDatePickerSmall: View {
     
     @Environment(\.managedObjectContext) var context
     
@@ -251,59 +251,59 @@ struct CustomDatePicker: View {
     
 }
 
-
-extension Date{
-    func getAllDates() -> [Date]{
-        let calendar = Calendar.current
-        
-        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-        
-        let range = calendar.range(of: .day, in: .month, for: startDate)!
-        
-        return range.compactMap( { day -> Date in
-            
-            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
-            
-        })
-    }
-    
-    func gettAllWeek() -> [Date]{
-        var calendar = Calendar(identifier: .gregorian)
-        
-        //        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-        let yearForWeekOfYear = calendar.component(.yearForWeekOfYear, from: self)
-        let weekNumber  = calendar.component(.weekOfYear, from: self)
-        //
-        let startDate = DateComponents(calendar: calendar, weekOfYear: weekNumber, yearForWeekOfYear: yearForWeekOfYear).date!
-        //        let endDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
-        //
-        //        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
-        //
-        //        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
-        
-        //        let weekRange = calendar.range(of: .day, in: .weekOfYear, for: components)
-        //        let range = calendar.range(of: .day, in: .weekOfYear, for: startOfWeek)!
-        
-        //        return weekRange.compactMap( { day -> Date in
-        //
-        //            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
-        //
-        //        })
-        
-        calendar.firstWeekday = 7
-        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
-        
-        var week : [Date] = []
-        
-        
-        (1...7).forEach{ day in
-            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
-                week.append(weekday)
-            }
-        }
- 
-        
-        return week
-        
-    }
-}
+//
+//extension Date{
+//    func getAllDates() -> [Date]{
+//        let calendar = Calendar.current
+//        
+//        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
+//        
+//        let range = calendar.range(of: .day, in: .month, for: startDate)!
+//        
+//        return range.compactMap( { day -> Date in
+//            
+//            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
+//            
+//        })
+//    }
+//    
+//    func gettAllWeek() -> [Date]{
+//        var calendar = Calendar(identifier: .gregorian)
+//        
+//        //        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
+//        let yearForWeekOfYear = calendar.component(.yearForWeekOfYear, from: self)
+//        let weekNumber  = calendar.component(.weekOfYear, from: self)
+//        //
+//        let startDate = DateComponents(calendar: calendar, weekOfYear: weekNumber, yearForWeekOfYear: yearForWeekOfYear).date!
+//        //        let endDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
+//        //
+//        //        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
+//        //
+//        //        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+//        
+//        //        let weekRange = calendar.range(of: .day, in: .weekOfYear, for: components)
+//        //        let range = calendar.range(of: .day, in: .weekOfYear, for: startOfWeek)!
+//        
+//        //        return weekRange.compactMap( { day -> Date in
+//        //
+//        //            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
+//        //
+//        //        })
+//        
+//        calendar.firstWeekday = 7
+//        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
+//        
+//        var week : [Date] = []
+//        
+//        
+//        (1...7).forEach{ day in
+//            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
+//                week.append(weekday)
+//            }
+//        }
+// 
+//        
+//        return week
+//        
+//    }
+//}

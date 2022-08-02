@@ -22,109 +22,129 @@ struct CustomWeekView: View {
     
     @State var index : Int = 0
     @State var currentWeek: Int = 0
+    @State var weekIndex : Int = 0
     @State var currentMonth: Int = 0
+    
+    @State var dateValues : [DateValue] = []
     
     var body: some View {
         
-        VStack(spacing: 35) {
+        VStack(spacing: 0) {
             
             let days : [String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-            
-            HStack(spacing: 20){
-                VStack(alignment: .leading, spacing: 10){
-                    Text(extraDate()[0])
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                    
-                    Text(extraDate()[1])
-                        .font(.title.bold())
-                }
-                
-                Spacer(minLength: 0)
-                
-                Button {
-                    withAnimation{
-                        currentWeek -= 1
-                        
-                    }
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                }
-                
-                Button {
-                    withAnimation{
-                        currentWeek += 1
-                        
-                    }
-                } label: {
-                    Image(systemName: "chevron.right")
-                        .font(.title2)
-                }
-                
-                
-            }
-            .padding(.horizontal)
+        
             
             // Day View
             HStack(spacing: 0){
                 ForEach(days,id: \.self){
                     day in
                     Text(day)
-                        .font(.callout)
+                        .font(.system(size:14))
                         .fontWeight(.semibold)
                         .frame(maxWidth:.infinity)
                 }
+            
             }
+            
+            TabView(selection: $index) {
+                           ForEach((days), id: \.self) { index in
+                               Text("\(index)")
+                           }
+                       }
+                       .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            
+            TabView(selection: $currentWeek) {
+                
+                        ForEach((weekIndex-1...weekIndex+1), id: \.self) { index in
+                            let columns = Array(repeating: GridItem(.flexible()), count: 7)
+                                  LazyVGrid(columns: columns, spacing: 15){
+                        ForEach(extractPrevWeek(value: index)) { value in
+
+                            LazyHStack{
+                            CardView(value: value)
+                                .background(
+                                    Capsule()
+                                        .fill(Color(.black))
+                                        .padding(.horizontal,8)
+                                        .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+
+                                )
+                                .onTapGesture {
+                                    currentDate = value.date
+                                }
+                            }
+                            .tag(index)
+                        }
+//                                  }.onChange(of: currentWeek){ newValue in
+//
+//
+////                                      weekIndex = weekIndex + 1
+//                                  }
+
+                                  }
+                                  .onChange(of: currentWeek){ value in
+                                      if weekIndex<currentWeek{
+                                          weekIndex += 1
+                                      }
+                                  }
+                        }
+              
+            }
+        
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             // Dates
             // Lazy Grid
-            let columns = Array(repeating: GridItem(.flexible()), count: 7)
-            LazyVGrid(columns: columns, spacing: 15){
-                          
-                ForEach(extractWeek()) { value in
-                    
-                    CardView(value: value)
-                        .background(
-                            Capsule()
-                                .fill(Color(.black))
-                                .padding(.horizontal,8)
-                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
-                            
-                        )
-                        .onTapGesture {
-                            currentDate = value.date
-                        }
-                }
-                
-                VStack{
-                    TabView(selection: $index) {
-                        ForEach((extractWeek()), id: \.self) { value in
-//                            CardView()
-                            
-                            CardView(value: value)
-                            
-                        }
-                    }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    Text("DSAFdsf")
-                }.hTop()
-//                ForEach(extractWeek()) { value in
+//            let columns = Array(repeating: GridItem(.flexible()), count: 7)
+//            LazyVGrid(columns: columns, spacing: 15){
 //
-//                    CardView(value: value)
-//                        .background(
-//                            Capsule()
-//                                .fill(Color(.black))
-//                                .padding(.horizontal,8)
-//                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
 //
-//                        )
-//                        .onTapGesture {
-//                            currentDate = value.date
-//                        }
-//                }
-
-            }.frame(maxWidth:.infinity)
+//
+////                ForEach(extractPrevWeek()) { value in
+////
+////
+////                    CardView(value: value)
+////                        .background(
+////                            Capsule()
+////                                .fill(Color(.black))
+////                                .padding(.horizontal,8)
+////                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+////
+////                        )
+////                        .onTapGesture {
+////                            currentDate = value.date
+////                        }
+////                }
+//
+////                VStack{
+////                    TabView(selection: $index) {
+////                        ForEach((extractWeek()), id: \.self) { value in
+//////                            CardView()
+////
+////                            CardView(value: value)
+////
+////                        }
+////                    }
+////                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+////                    Text("DSAFdsf")
+////                }.hTop()
+////                ForEach(extractWeek()) { value in
+////
+////                    CardView(value: value)
+////                        .background(
+////                            Capsule()
+////                                .fill(Color(.black))
+////                                .padding(.horizontal,8)
+////                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+////
+////                        )
+////                        .onTapGesture {
+////                            currentDate = value.date
+////                        }
+////                }
+//
+//            }.frame(maxWidth:.infinity)
 
             
             
@@ -150,7 +170,7 @@ struct CustomWeekView: View {
             .padding()
             .padding(.top,20)
         }
-        .frame(maxHeight :.infinity,alignment: .top)
+//        .frame(maxHeight :.infinity,alignment: .top)
         .onChange(of: currentWeek) { newValue in
             
             // updating month
@@ -226,39 +246,78 @@ struct CustomWeekView: View {
         
         return currentWeek
     }
- 
-//    func extractDate()->[DateValue]{
-//        let calendar = Calendar.current
-//
-//        // Get current month
-//        let currentMonth = getCurrentMonth()
-//
-//        var days = currentMonth.getAllDates().compactMap{date -> DateValue in
-//
-//            //get day
-//            let day = calendar.component(.day, from: date)
-//
-//            return DateValue(day: day, date: date)
-//
-//        }
-//
-//        // adding offset days to get exact week day...
-//        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
-//
-//        for _ in 0..<firstWeekday-1 {
-//            days.insert(DateValue(day: -1, date: Date()), at: 0)
-//        }
-//
-//        return days
-//
-//    }
-    
+
+    func getCurrentWeek(value: Int)->Date{
+        let calendar = Calendar.current
+        
+        //getting current month date
+        
+        guard let currentWeek = calendar.date(byAdding: .weekOfYear, value: self.currentWeek+value , to: Date()) else {
+            return Date()
+        }
+        
+        return currentWeek
+    }
+
     
     func extractWeek()->[DateValue]{
         let calendar = Calendar.current
         
         // Get current month
         let currentWeek = getCurrentWeek()
+        
+        var days = currentWeek.gettAllWeek().compactMap{date -> DateValue in
+            
+            //get day
+            let day = calendar.component(.day, from: date)
+            
+            return DateValue(day: day, date: date)
+            
+        }
+    
+        // adding offset days to get exact week day...
+        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+        
+        for _ in 0..<firstWeekday-1 {
+            days.insert(DateValue(day: -1, date: Date()), at: 0)
+        }
+        
+        return days
+        
+    }
+    
+    func extractPrevWeek(value: Int)->[DateValue]{
+        let calendar = Calendar.current
+        
+        // Get current month
+        let currentWeek = getCurrentWeek(value: currentWeek-value)
+        
+        var days = currentWeek.gettAllWeek().compactMap{date -> DateValue in
+            
+            //get day
+            let day = calendar.component(.day, from: date)
+            
+            return DateValue(day: day, date: date)
+            
+        }
+    
+        // adding offset days to get exact week day...
+        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+        
+        for _ in 0..<firstWeekday-1 {
+            days.insert(DateValue(day: -1, date: Date()), at: 0)
+        }
+        
+        return days
+        
+    }
+    
+    
+    func extractNextWeek()->[DateValue]{
+        let calendar = Calendar.current
+        
+        // Get current month
+        let currentWeek = getCurrentWeek(value: currentWeek+1)
         
         var days = currentWeek.gettAllWeek().compactMap{date -> DateValue in
             

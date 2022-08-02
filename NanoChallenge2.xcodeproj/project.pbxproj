@@ -24,8 +24,13 @@
 		4C79813E28985C0E000BE4BE /* CustomWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813D28985C0E000BE4BE /* CustomWeekView.swift */; };
 		4C79814028986A7D000BE4BE /* BackUPHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813F28986A7D000BE4BE /* BackUPHome.swift */; };
 		4CB5406C28986D7D00E1A403 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5406B28986D7D00E1A403 /* SwiftUISnappingScrollView */; };
-		4CB5406F28986F8900E1A403 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5406E28986F8900E1A403 /* ACarousel */; };
-		4CB5407228986FA800E1A403 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5407128986FA800E1A403 /* ACarousel */; };
+		4CB543282899503600E1A403 /* CalendarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB543272899503600E1A403 /* CalendarKit */; };
+		4CB5432B2899506E00E1A403 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5432A2899506E00E1A403 /* CalendarView.swift */; };
+		4CB5432E2899507D00E1A403 /* CalendarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5432D2899507D00E1A403 /* CalendarKit */; };
+		4CB543302899509E00E1A403 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5432F2899509E00E1A403 /* CalendarController.swift */; };
+		4CB543322899528D00E1A403 /* CalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543312899528D00E1A403 /* CalendarWeek.swift */; };
+		4CB5433428997F4D00E1A403 /* CustomDatePickerSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5433328997F4D00E1A403 /* CustomDatePickerSmall.swift */; };
+		4CB543AD2899A7B100E1A403 /* CustonCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +52,11 @@
 		4C79813928930E56000BE4BE /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		4C79813D28985C0E000BE4BE /* CustomWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWeekView.swift; sourceTree = "<group>"; };
 		4C79813F28986A7D000BE4BE /* BackUPHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackUPHome.swift; sourceTree = "<group>"; };
+		4CB5432A2899506E00E1A403 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		4CB5432F2899509E00E1A403 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		4CB543312899528D00E1A403 /* CalendarWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeek.swift; sourceTree = "<group>"; };
+		4CB5433328997F4D00E1A403 /* CustomDatePickerSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerSmall.swift; sourceTree = "<group>"; };
+		4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonCarousel.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,8 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CB5406F28986F8900E1A403 /* ACarousel in Frameworks */,
-				4CB5407228986FA800E1A403 /* ACarousel in Frameworks */,
+				4CB5432E2899507D00E1A403 /* CalendarKit in Frameworks */,
+				4CB543282899503600E1A403 /* CalendarKit in Frameworks */,
 				4CB5406C28986D7D00E1A403 /* SwiftUISnappingScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +93,7 @@
 		4C2925D5288F8EFB00A9E517 /* NanoChallenge2 */ = {
 			isa = PBXGroup;
 			children = (
+				4CB543292899506400E1A403 /* Calendar */,
 				4C292616288FCBD400A9E517 /* ViewModel */,
 				4C292611288FCB2F00A9E517 /* View */,
 				4C292610288FCB2500A9E517 /* Model */,
@@ -124,6 +135,9 @@
 				4C79813928930E56000BE4BE /* DateValue.swift */,
 				4C79813D28985C0E000BE4BE /* CustomWeekView.swift */,
 				4C79813F28986A7D000BE4BE /* BackUPHome.swift */,
+				4CB543312899528D00E1A403 /* CalendarWeek.swift */,
+				4CB5433328997F4D00E1A403 /* CustomDatePickerSmall.swift */,
+				4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,6 +148,15 @@
 				4C292617288FCBFF00A9E517 /* TaskViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4CB543292899506400E1A403 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				4CB5432A2899506E00E1A403 /* CalendarView.swift */,
+				4CB5432F2899509E00E1A403 /* CalendarController.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,8 +177,8 @@
 			name = NanoChallenge2;
 			packageProductDependencies = (
 				4CB5406B28986D7D00E1A403 /* SwiftUISnappingScrollView */,
-				4CB5406E28986F8900E1A403 /* ACarousel */,
-				4CB5407128986FA800E1A403 /* ACarousel */,
+				4CB543272899503600E1A403 /* CalendarKit */,
+				4CB5432D2899507D00E1A403 /* CalendarKit */,
 			);
 			productName = NanoChallenge2;
 			productReference = 4C2925D3288F8EFB00A9E517 /* NanoChallenge2.app */;
@@ -187,8 +210,7 @@
 			mainGroup = 4C2925CA288F8EFA00A9E517;
 			packageReferences = (
 				4CB5406A28986D7D00E1A403 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
-				4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */,
-				4CB5407028986FA800E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */,
+				4CB543262899503600E1A403 /* XCRemoteSwiftPackageReference "CalendarKit" */,
 			);
 			productRefGroup = 4C2925D4288F8EFB00A9E517 /* Products */;
 			projectDirPath = "";
@@ -217,20 +239,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C2925E3288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld in Sources */,
+				4CB543AD2899A7B100E1A403 /* CustonCarousel.swift in Sources */,
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
+				4CB5432B2899506E00E1A403 /* CalendarView.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
 				4C2926262890794900A9E517 /* Filter.swift in Sources */,
 				4C29261C2890356200A9E517 /* HomeView.swift in Sources */,
 				4C79813828930B68000BE4BE /* CustomDatePicker.swift in Sources */,
 				4C79813E28985C0E000BE4BE /* CustomWeekView.swift in Sources */,
+				4CB543322899528D00E1A403 /* CalendarWeek.swift in Sources */,
 				4C29261A288FD20300A9E517 /* Helper.swift in Sources */,
 				4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */,
+				4CB5433428997F4D00E1A403 /* CustomDatePickerSmall.swift in Sources */,
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4C79813A28930E56000BE4BE /* DateValue.swift in Sources */,
 				4C79814028986A7D000BE4BE /* BackUPHome.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
+				4CB543302899509E00E1A403 /* CalendarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,20 +468,12 @@
 				kind = branch;
 			};
 		};
-		4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */ = {
+		4CB543262899503600E1A403 /* XCRemoteSwiftPackageReference "CalendarKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JWAutumn/ACarousel";
+			repositoryURL = "https://github.com/richardtop/CalendarKit";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
-			};
-		};
-		4CB5407028986FA800E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JWAutumn/ACarousel";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -465,15 +484,15 @@
 			package = 4CB5406A28986D7D00E1A403 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */;
 			productName = SwiftUISnappingScrollView;
 		};
-		4CB5406E28986F8900E1A403 /* ACarousel */ = {
+		4CB543272899503600E1A403 /* CalendarKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */;
-			productName = ACarousel;
+			package = 4CB543262899503600E1A403 /* XCRemoteSwiftPackageReference "CalendarKit" */;
+			productName = CalendarKit;
 		};
-		4CB5407128986FA800E1A403 /* ACarousel */ = {
+		4CB5432D2899507D00E1A403 /* CalendarKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */;
-			productName = ACarousel;
+			package = 4CB543262899503600E1A403 /* XCRemoteSwiftPackageReference "CalendarKit" */;
+			productName = CalendarKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 
