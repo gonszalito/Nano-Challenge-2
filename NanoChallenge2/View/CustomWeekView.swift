@@ -6,18 +6,21 @@
 //
 
 import SwiftUI
+import SwiftUISnappingScrollView
+import ACarousel
 
-struct CustomDatePicker: View {
+struct CustomWeekView: View {
     
     @Environment(\.managedObjectContext) var context
     
     @FetchRequest(
         sortDescriptors: []
-    ) var tasks: FetchedResults<Task>
+     ) var tasks: FetchedResults<Task>
     
     @StateObject var taskModel : TaskViewModel
     @Binding var currentDate: Date
     
+    @State var index : Int = 0
     @State var currentWeek: Int = 0
     @State var currentMonth: Int = 0
     
@@ -41,7 +44,7 @@ struct CustomDatePicker: View {
                 
                 Button {
                     withAnimation{
-                        currentMonth -= 1
+                        currentWeek -= 1
                         
                     }
                 } label: {
@@ -51,7 +54,7 @@ struct CustomDatePicker: View {
                 
                 Button {
                     withAnimation{
-                        currentMonth += 1
+                        currentWeek += 1
                         
                     }
                 } label: {
@@ -73,12 +76,13 @@ struct CustomDatePicker: View {
                         .frame(maxWidth:.infinity)
                 }
             }
-            //
-            //            Dates
-            //            Lazy Grid
+            
+            // Dates
+            // Lazy Grid
             let columns = Array(repeating: GridItem(.flexible()), count: 7)
             LazyVGrid(columns: columns, spacing: 15){
-                ForEach(extractDate()) { value in
+                          
+                ForEach(extractWeek()) { value in
                     
                     CardView(value: value)
                         .background(
@@ -92,26 +96,69 @@ struct CustomDatePicker: View {
                             currentDate = value.date
                         }
                 }
-            }
+                
+                VStack{
+                    TabView(selection: $index) {
+                        ForEach((extractWeek()), id: \.self) { value in
+//                            CardView()
+                            
+                            CardView(value: value)
+                            
+                        }
+                    }
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    Text("DSAFdsf")
+                }.hTop()
+//                ForEach(extractWeek()) { value in
+//
+//                    CardView(value: value)
+//                        .background(
+//                            Capsule()
+//                                .fill(Color(.black))
+//                                .padding(.horizontal,8)
+//                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+//
+//                        )
+//                        .onTapGesture {
+//                            currentDate = value.date
+//                        }
+//                }
+
+            }.frame(maxWidth:.infinity)
+
             
             
+//            LazyHStack {
+//                ForEach(extractWeek()) { value in
+//
+//                    CardView(value: value)
+//                        .background(
+//                            Capsule()
+//                                .fill(Color(.black))
+//                                .padding(.horizontal,8)
+//                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+//
+//                        )
+//                        .onTapGesture {
+//                            currentDate = value.date
+//                        }
+//                }
+//            }
             
-            
-            
-            
-            
+
+
             .padding()
             .padding(.top,20)
         }
         .frame(maxHeight :.infinity,alignment: .top)
-        .onChange(of: currentMonth) { newValue in
+        .onChange(of: currentWeek) { newValue in
             
             // updating month
-            currentDate = getCurrentMonth()
+            currentDate = getCurrentWeek()
         }
         
         
-        
+    
     }
     @ViewBuilder
     func CardView(value: DateValue)->some View {
@@ -144,7 +191,7 @@ struct CustomDatePicker: View {
             
         }
         .padding(.vertical,8)
-        //        .frame(height: 30, alignment: .top)
+//        .frame(height: 30, alignment: .top)
     }
     
     
@@ -166,54 +213,45 @@ struct CustomDatePicker: View {
         return date.components(separatedBy: " ")
     }
     
-    func getCurrentMonth()->Date{
-        let calendar = Calendar.current
-        
-        //getting current month date
-        guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth , to: Date()) else {
-            return Date()
-        }
-        
-        return currentMonth
-    }
     
-    
-    func extractDate()->[DateValue]{
-        let calendar = Calendar.current
-        
-        // Get current month
-        let currentMonth = getCurrentMonth()
-        
-        var days = currentMonth.getAllDates().compactMap{date -> DateValue in
-            
-            //get day
-            let day = calendar.component(.day, from: date)
-            
-            return DateValue(day: day, date: date)
-            
-        }
-        
-        // adding offset days to get exact week day...
-        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
-        
-        for _ in 0..<firstWeekday-1 {
-            days.insert(DateValue(day: -1, date: Date()), at: 0)
-        }
-        
-        return days
-        
-    }
+//
     
     func getCurrentWeek()->Date{
         let calendar = Calendar.current
         
         //getting current month date
-        guard let currentWeek = calendar.date(byAdding: .weekOfMonth, value: self.currentWeek , to: Date()) else {
+        guard let currentWeek = calendar.date(byAdding: .weekOfYear, value: self.currentWeek , to: Date()) else {
             return Date()
         }
         
         return currentWeek
     }
+ 
+//    func extractDate()->[DateValue]{
+//        let calendar = Calendar.current
+//
+//        // Get current month
+//        let currentMonth = getCurrentMonth()
+//
+//        var days = currentMonth.getAllDates().compactMap{date -> DateValue in
+//
+//            //get day
+//            let day = calendar.component(.day, from: date)
+//
+//            return DateValue(day: day, date: date)
+//
+//        }
+//
+//        // adding offset days to get exact week day...
+//        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+//
+//        for _ in 0..<firstWeekday-1 {
+//            days.insert(DateValue(day: -1, date: Date()), at: 0)
+//        }
+//
+//        return days
+//
+//    }
     
     
     func extractWeek()->[DateValue]{
@@ -222,7 +260,7 @@ struct CustomDatePicker: View {
         // Get current month
         let currentWeek = getCurrentWeek()
         
-        var days = currentWeek.getAllDates().compactMap{date -> DateValue in
+        var days = currentWeek.gettAllWeek().compactMap{date -> DateValue in
             
             //get day
             let day = calendar.component(.day, from: date)
@@ -230,7 +268,7 @@ struct CustomDatePicker: View {
             return DateValue(day: day, date: date)
             
         }
-        
+    
         // adding offset days to get exact week day...
         let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
         
@@ -247,59 +285,3 @@ struct CustomDatePicker: View {
 }
 
 
-extension Date{
-    func getAllDates() -> [Date]{
-        let calendar = Calendar.current
-        
-        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-        
-        let range = calendar.range(of: .day, in: .month, for: startDate)!
-        
-        return range.compactMap( { day -> Date in
-            
-            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
-            
-        })
-        
-    }
-    
-    func gettAllWeek() -> [Date]{
-        var calendar = Calendar(identifier: .gregorian)
-        
-        //        let startDate = calendar.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-        let yearForWeekOfYear = calendar.component(.yearForWeekOfYear, from: self)
-        let weekNumber  = calendar.component(.weekOfYear, from: self)
-        //
-        let startDate = DateComponents(calendar: calendar, weekOfYear: weekNumber, yearForWeekOfYear: yearForWeekOfYear).date!
-        //        let endDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!
-        //
-        //        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
-        //
-        //        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
-        
-        //        let weekRange = calendar.range(of: .day, in: .weekOfYear, for: components)
-        //        let range = calendar.range(of: .day, in: .weekOfYear, for: startOfWeek)!
-        
-        //        return weekRange.compactMap( { day -> Date in
-        //
-        //            return calendar.date(byAdding: .day, value: day-1, to: startDate)!
-        //
-        //        })
-        
-        calendar.firstWeekday = 7
-        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
-        
-        var week : [Date] = []
-        
-        
-        (1...7).forEach{ day in
-            if let weekday = calendar.date(byAdding: .day, value: day, to: startOfWeek){
-                week.append(weekday)
-            }
-        }
- 
-        
-        return week
-        
-    }
-}

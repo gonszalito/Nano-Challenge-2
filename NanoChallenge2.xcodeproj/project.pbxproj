@@ -18,9 +18,14 @@
 		4C29261A288FD20300A9E517 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C292619288FD20300A9E517 /* Helper.swift */; };
 		4C29261C2890356200A9E517 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C29261B2890356200A9E517 /* HomeView.swift */; };
 		4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C29261D28906AD600A9E517 /* CoreData.xcdatamodeld */; };
-		4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926252890794900A9E517 /* DynamicFilterView.swift */; };
+		4C2926262890794900A9E517 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2926252890794900A9E517 /* Filter.swift */; };
 		4C79813828930B68000BE4BE /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813728930B68000BE4BE /* CustomDatePicker.swift */; };
 		4C79813A28930E56000BE4BE /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813928930E56000BE4BE /* DateValue.swift */; };
+		4C79813E28985C0E000BE4BE /* CustomWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813D28985C0E000BE4BE /* CustomWeekView.swift */; };
+		4C79814028986A7D000BE4BE /* BackUPHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79813F28986A7D000BE4BE /* BackUPHome.swift */; };
+		4CB5406C28986D7D00E1A403 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5406B28986D7D00E1A403 /* SwiftUISnappingScrollView */; };
+		4CB5406F28986F8900E1A403 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5406E28986F8900E1A403 /* ACarousel */; };
+		4CB5407228986FA800E1A403 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 4CB5407128986FA800E1A403 /* ACarousel */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,9 +42,11 @@
 		4C292619288FD20300A9E517 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		4C29261B2890356200A9E517 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4C29261E28906AD600A9E517 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		4C2926252890794900A9E517 /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
+		4C2926252890794900A9E517 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		4C79813728930B68000BE4BE /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		4C79813928930E56000BE4BE /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		4C79813D28985C0E000BE4BE /* CustomWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWeekView.swift; sourceTree = "<group>"; };
+		4C79813F28986A7D000BE4BE /* BackUPHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackUPHome.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,6 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CB5406F28986F8900E1A403 /* ACarousel in Frameworks */,
+				4CB5407228986FA800E1A403 /* ACarousel in Frameworks */,
+				4CB5406C28986D7D00E1A403 /* SwiftUISnappingScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,10 +118,12 @@
 			children = (
 				4C2925D8288F8EFB00A9E517 /* ContentView.swift */,
 				4C29261B2890356200A9E517 /* HomeView.swift */,
-				4C2926252890794900A9E517 /* DynamicFilterView.swift */,
+				4C2926252890794900A9E517 /* Filter.swift */,
 				4CF2A70028907EB600B8D1EC /* NewTaskView.swift */,
 				4C79813728930B68000BE4BE /* CustomDatePicker.swift */,
 				4C79813928930E56000BE4BE /* DateValue.swift */,
+				4C79813D28985C0E000BE4BE /* CustomWeekView.swift */,
+				4C79813F28986A7D000BE4BE /* BackUPHome.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -141,6 +153,9 @@
 			);
 			name = NanoChallenge2;
 			packageProductDependencies = (
+				4CB5406B28986D7D00E1A403 /* SwiftUISnappingScrollView */,
+				4CB5406E28986F8900E1A403 /* ACarousel */,
+				4CB5407128986FA800E1A403 /* ACarousel */,
 			);
 			productName = NanoChallenge2;
 			productReference = 4C2925D3288F8EFB00A9E517 /* NanoChallenge2.app */;
@@ -171,6 +186,9 @@
 			);
 			mainGroup = 4C2925CA288F8EFA00A9E517;
 			packageReferences = (
+				4CB5406A28986D7D00E1A403 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
+				4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */,
+				4CB5407028986FA800E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */,
 			);
 			productRefGroup = 4C2925D4288F8EFB00A9E517 /* Products */;
 			projectDirPath = "";
@@ -202,14 +220,16 @@
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
-				4C2926262890794900A9E517 /* DynamicFilterView.swift in Sources */,
+				4C2926262890794900A9E517 /* Filter.swift in Sources */,
 				4C29261C2890356200A9E517 /* HomeView.swift in Sources */,
 				4C79813828930B68000BE4BE /* CustomDatePicker.swift in Sources */,
+				4C79813E28985C0E000BE4BE /* CustomWeekView.swift in Sources */,
 				4C29261A288FD20300A9E517 /* Helper.swift in Sources */,
 				4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */,
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4C79813A28930E56000BE4BE /* DateValue.swift in Sources */,
+				4C79814028986A7D000BE4BE /* BackUPHome.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +431,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4CB5406A28986D7D00E1A403 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ciaranrobrien/SwiftUISnappingScrollView";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JWAutumn/ACarousel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+		4CB5407028986FA800E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JWAutumn/ACarousel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4CB5406B28986D7D00E1A403 /* SwiftUISnappingScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CB5406A28986D7D00E1A403 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */;
+			productName = SwiftUISnappingScrollView;
+		};
+		4CB5406E28986F8900E1A403 /* ACarousel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */;
+			productName = ACarousel;
+		};
+		4CB5407128986FA800E1A403 /* ACarousel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CB5406D28986F8900E1A403 /* XCRemoteSwiftPackageReference "ACarousel" */;
+			productName = ACarousel;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4C2925E1288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld */ = {

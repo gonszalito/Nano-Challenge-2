@@ -17,6 +17,8 @@ class TaskViewModel : ObservableObject{
     
     @Environment(\.managedObjectContext) var context
     
+    @Published var currentWeekIndex : Int = 0
+    
     // MARK: New Task Properties
     @Published var taskTitle : String = ""
     @Published var taskDescription : String = ""
@@ -39,6 +41,7 @@ class TaskViewModel : ObservableObject{
     @Published var started : Bool = false
     @Published var finished : Bool = false
     
+    @Published var dateValues: [DateValue] = []
     
     // MARK: All Tasks
     @Published var allTask : [Task] = []
@@ -95,6 +98,7 @@ class TaskViewModel : ObservableObject{
         fetchPreviousNextWeek()
         appendAllWeek()
         fetchAllTasks()
+        dateValues = extractWeek()
 //        fetchPreviousNextWeek()
         //        filterTodayTasks()
     }
@@ -458,4 +462,47 @@ class TaskViewModel : ObservableObject{
         
     }
     
+    
+    func getCurrentWeek()->Date{
+        let calendar = Calendar.current
+        
+        //getting current month date
+        guard let currentWeek = calendar.date(byAdding: .weekOfYear, value: self.currentWeekIndex , to: Date()) else {
+            return Date()
+        }
+        
+        return currentWeek
+    }
+    
+    func extractWeek()->[DateValue]{
+        let calendar = Calendar.current
+        
+        // Get current month
+        let currentWeek = getCurrentWeek()
+        
+        var days = currentWeek.gettAllWeek().compactMap{date -> DateValue in
+            
+            //get day
+            let day = calendar.component(.day, from: date)
+            
+            return DateValue(day: day, date: date)
+            
+        }
+    
+        // adding offset days to get exact week day...
+        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+        
+        for _ in 0..<firstWeekday-1 {
+            days.insert(DateValue(day: -1, date: Date()), at: 0)
+        }
+        
+        return days
+        
+    }
+    
+    
 }
+
+
+
+    

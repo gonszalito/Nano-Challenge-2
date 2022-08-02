@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "acarousel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JWAutumn/ACarousel",
+      "state" : {
+        "revision" : "8a322513580f21288fd87eb3a1341c247b3e2a76",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "swiftuisnappingscrollview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ciaranrobrien/SwiftUISnappingScrollView",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e2cd31e59f61478dae08b9f941bfb910c9413f00"
+      }
+    }
+  ],
+  "version" : 2
+}
