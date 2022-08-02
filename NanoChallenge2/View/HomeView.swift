@@ -99,16 +99,19 @@ struct HomeView: View {
                 // MARK: Week View
                 ZStack{
                     HStack(spacing : 10){
+                        
+                        
+                        
                         ForEach(taskModel.currentWeek,id: \.self) { day in
-                            
+
                             VStack(spacing : 10){
                                 Text(taskModel.extractDate(date: day, format: "EEE"))
                                     .font(.system(size:14))
                                     .fontWeight(.semibold)
-                                
+
                                 Text(taskModel.extractDate(date: day, format: "dd"))
                                     .font(.system(size:14))
-                                
+
                                 Circle()
                                     .fill(.white)
                                     .frame(width: 8, height: 8)
@@ -127,8 +130,8 @@ struct HomeView: View {
                                             .fill(.black)
                                             .matchedGeometryEffect(id: "CURRENTDAY", in: animation)
                                     }
-                                    
-                                    
+
+
                                 }
                             )
                             .contentShape(Capsule())
@@ -138,7 +141,7 @@ struct HomeView: View {
                                     taskModel.currentDate = day
                                 }
                             }
-                            
+
                         }
                         
                     }
@@ -152,16 +155,29 @@ struct HomeView: View {
                     
                     
                     if animatedStates[0]{
+                        
+                        
+//                           VStack{
+//                               TabView(selection: $index) {
+//                                   ForEach($taskModel.dateValues.count,id: \.self){_ in
+//                                       Text("print")
+//                                   }
+//                               }
+//                               .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        
                         // MARK: Home View
-                        CustomDatePicker( taskModel: taskModel, currentDate: $taskModel.currentDate)
-                            .background(
-                                RoundedRectangle(cornerRadius: 30,style: .continuous)
-                                    .fill(.clear)
-                                    .matchedGeometryEffect(id: "DATEVIEW", in: animation)
-                            )
-                            .onChange(of: taskModel.currentDate, perform: { _ in
-                                taskModel.fetchWeek()
-                            })
+//                        DatePicker.init("",selection: $taskModel.currentDate,displayedComponents: [.date])
+//                            .datePickerStyle(.graphical)
+////                        CustomDatePicker( taskModel: taskModel, currentDate: $taskModel.currentDate)
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 30,style: .continuous)
+//                                    .fill(.clear)
+//                                    .matchedGeometryEffect(id: "DATEVIEW", in: animation)
+//                            )
+//                            .onChange(of: taskModel.currentDate, perform: { _ in
+//                                taskModel.fetchWeek()
+//                            })
+                        CustomWeekView(taskModel: self.taskModel, currentDate: $taskModel.currentDate)
                     }
                     
                     
@@ -191,6 +207,8 @@ struct HomeView: View {
             }
         }
     }
+    
+    
     
     func WeekCardView(week : [Date])->some View{
         HStack{
