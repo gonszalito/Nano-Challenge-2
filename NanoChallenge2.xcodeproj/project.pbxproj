@@ -37,6 +37,9 @@
 		4CB543B6289A518B00E1A403 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543B5289A518B00E1A403 /* View.swift */; };
 		4CB543B9289A9A7300E1A403 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543B8289A9A7300E1A403 /* WeekView.swift */; };
 		4CB543BB289A9FA600E1A403 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543BA289A9FA600E1A403 /* Card.swift */; };
+		4CB543BD289AB9F500E1A403 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543BC289AB9F500E1A403 /* WeekViewModel.swift */; };
+		4CB543BF289AF1C800E1A403 /* CustomCarouselBU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543BE289AF1C800E1A403 /* CustomCarouselBU.swift */; };
+		4CB543C1289AFEB900E1A403 /* TESTSETS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543C0289AFEB900E1A403 /* TESTSETS.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +72,9 @@
 		4CB543B5289A518B00E1A403 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		4CB543B8289A9A7300E1A403 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		4CB543BA289A9FA600E1A403 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		4CB543BC289AB9F500E1A403 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
+		4CB543BE289AF1C800E1A403 /* CustomCarouselBU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCarouselBU.swift; sourceTree = "<group>"; };
+		4CB543C0289AFEB900E1A403 /* TESTSETS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESTSETS.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +160,7 @@
 				4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */,
 				4CB543AE289A4AD900E1A403 /* ScrollWeekView.swift */,
 				4CB543B0289A4FFF00E1A403 /* CustomScroll3.swift */,
+				4CB543BE289AF1C800E1A403 /* CustomCarouselBU.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,6 +187,7 @@
 			children = (
 				4CB543B3289A517300E1A403 /* Scroll.swift */,
 				4CB543B5289A518B00E1A403 /* View.swift */,
+				4CB543BC289AB9F500E1A403 /* WeekViewModel.swift */,
 			);
 			path = TSET;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 			children = (
 				4CB543B8289A9A7300E1A403 /* WeekView.swift */,
 				4CB543BA289A9FA600E1A403 /* Card.swift */,
+				4CB543C0289AFEB900E1A403 /* TESTSETS.swift */,
 			);
 			path = WeekView;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 				4C2925E3288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld in Sources */,
 				4CB543AD2899A7B100E1A403 /* CustonCarousel.swift in Sources */,
 				4CB543AF289A4AD900E1A403 /* ScrollWeekView.swift in Sources */,
+				4CB543BD289AB9F500E1A403 /* WeekViewModel.swift in Sources */,
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
 				4CB5432B2899506E00E1A403 /* CalendarView.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
@@ -291,11 +301,13 @@
 				4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */,
 				4CB543BB289A9FA600E1A403 /* Card.swift in Sources */,
 				4CB5433428997F4D00E1A403 /* CustomDatePickerSmall.swift in Sources */,
+				4CB543C1289AFEB900E1A403 /* TESTSETS.swift in Sources */,
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4C79813A28930E56000BE4BE /* DateValue.swift in Sources */,
 				4C79814028986A7D000BE4BE /* BackUPHome.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
+				4CB543BF289AF1C800E1A403 /* CustomCarouselBU.swift in Sources */,
 				4CB543B9289A9A7300E1A403 /* WeekView.swift in Sources */,
 				4CB543302899509E00E1A403 /* CalendarController.swift in Sources */,
 			);

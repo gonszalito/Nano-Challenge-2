@@ -214,8 +214,6 @@ class TaskViewModel : ObservableObject{
             }
             
         }
-        
-        
     }
     
 //    func refreshWeek() {

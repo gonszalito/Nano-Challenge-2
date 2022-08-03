@@ -40,6 +40,7 @@ struct ScrollingHStackModifier: ViewModifier {
             .gesture(DragGesture()
                 .onChanged({ event in
                     dragOffset = event.translation.width
+                    print("test2")
                 })
                 .onEnded({ event in
                     // Scroll to where user dragged
@@ -75,6 +76,7 @@ struct ScrollingHStackModifier: ViewModifier {
                         scrollOffset = newOffset
                     
                     }
+                    
                     
                     
                 })

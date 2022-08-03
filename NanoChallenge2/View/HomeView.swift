@@ -97,7 +97,8 @@ struct HomeView: View {
                 .frame(height: 100)
                 
                 // MARK: Week View
-                ZStack{
+                GeometryReader { geometry in
+                    ScrollView(.horizontal,showsIndicators: false){
                     HStack(spacing : 10){
                         
                         
@@ -110,6 +111,7 @@ struct HomeView: View {
                                     .fontWeight(.semibold)
 
                                 Text(taskModel.extractDate(date: day, format: "dd"))
+                        
                                     .font(.system(size:14))
 
                                 Circle()
@@ -153,7 +155,8 @@ struct HomeView: View {
                     )
                     .frame(maxWidth: .infinity, alignment: .center)
                     
-                    
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
                     if animatedStates[0]{
                         
                         
