@@ -13,7 +13,8 @@ struct ContentView: View {
     @State var currentIndex: Int = 0
     
     var body: some View {
-       HomeView()
+//       SnapCarousel(UIState: UIStateModel())
+        CarouselView()
     }
 }
 

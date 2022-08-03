@@ -27,12 +27,14 @@ struct CarouselView: View {
     @State private var snappedItem = 0.0
     @State private var draggingItem = 0.0
     
+    @State var currentIndex :Item2 = Item2(id: 0, title: "ad", color: .red)
     var body: some View {
         
         ZStack {
             ForEach(store.items) { item in
                 
                 // article view
+                
                 ZStack {
                     RoundedRectangle(cornerRadius: 18)
                         .fill(item.color)
@@ -65,11 +67,14 @@ struct CarouselView: View {
 
                         snappedItem = draggingItem
                         
-                        store.items.append(Item2(id: 100+store.items.count, title: "dasf+\(store.items.count)", color: .cyan))
+                   
 //                        store.items.removeAll()
                         
                         print(snappedItem)
                         
+                        DispatchQueue.main.async {
+                            store.items.append(Item2(id: 100+store.items.count, title: "dasf+\(store.items.count)", color: .cyan))
+                        }
                     }
                 }
         )
@@ -84,4 +89,5 @@ struct CarouselView: View {
         return sin(angle) * 200
     }
     
+  
 }

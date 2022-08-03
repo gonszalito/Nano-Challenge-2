@@ -31,6 +31,12 @@
 		4CB543322899528D00E1A403 /* CalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543312899528D00E1A403 /* CalendarWeek.swift */; };
 		4CB5433428997F4D00E1A403 /* CustomDatePickerSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5433328997F4D00E1A403 /* CustomDatePickerSmall.swift */; };
 		4CB543AD2899A7B100E1A403 /* CustonCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */; };
+		4CB543AF289A4AD900E1A403 /* ScrollWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543AE289A4AD900E1A403 /* ScrollWeekView.swift */; };
+		4CB543B1289A4FFF00E1A403 /* CustomScroll3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543B0289A4FFF00E1A403 /* CustomScroll3.swift */; };
+		4CB543B4289A517300E1A403 /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543B3289A517300E1A403 /* Scroll.swift */; };
+		4CB543B6289A518B00E1A403 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543B5289A518B00E1A403 /* View.swift */; };
+		4CB543B9289A9A7300E1A403 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543B8289A9A7300E1A403 /* WeekView.swift */; };
+		4CB543BB289A9FA600E1A403 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB543BA289A9FA600E1A403 /* Card.swift */; };
 		4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2A70028907EB600B8D1EC /* NewTaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +63,12 @@
 		4CB543312899528D00E1A403 /* CalendarWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeek.swift; sourceTree = "<group>"; };
 		4CB5433328997F4D00E1A403 /* CustomDatePickerSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerSmall.swift; sourceTree = "<group>"; };
 		4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonCarousel.swift; sourceTree = "<group>"; };
+		4CB543AE289A4AD900E1A403 /* ScrollWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollWeekView.swift; sourceTree = "<group>"; };
+		4CB543B0289A4FFF00E1A403 /* CustomScroll3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScroll3.swift; sourceTree = "<group>"; };
+		4CB543B3289A517300E1A403 /* Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
+		4CB543B5289A518B00E1A403 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		4CB543B8289A9A7300E1A403 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		4CB543BA289A9FA600E1A403 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4CF2A70028907EB600B8D1EC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +105,8 @@
 		4C2925D5288F8EFB00A9E517 /* NanoChallenge2 */ = {
 			isa = PBXGroup;
 			children = (
+				4CB543B7289A9A6000E1A403 /* WeekView */,
+				4CB543B2289A516B00E1A403 /* TSET */,
 				4CB543292899506400E1A403 /* Calendar */,
 				4C292616288FCBD400A9E517 /* ViewModel */,
 				4C292611288FCB2F00A9E517 /* View */,
@@ -138,6 +152,8 @@
 				4CB543312899528D00E1A403 /* CalendarWeek.swift */,
 				4CB5433328997F4D00E1A403 /* CustomDatePickerSmall.swift */,
 				4CB543AC2899A7B100E1A403 /* CustonCarousel.swift */,
+				4CB543AE289A4AD900E1A403 /* ScrollWeekView.swift */,
+				4CB543B0289A4FFF00E1A403 /* CustomScroll3.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,6 +173,24 @@
 				4CB5432F2899509E00E1A403 /* CalendarController.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		4CB543B2289A516B00E1A403 /* TSET */ = {
+			isa = PBXGroup;
+			children = (
+				4CB543B3289A517300E1A403 /* Scroll.swift */,
+				4CB543B5289A518B00E1A403 /* View.swift */,
+			);
+			path = TSET;
+			sourceTree = "<group>";
+		};
+		4CB543B7289A9A6000E1A403 /* WeekView */ = {
+			isa = PBXGroup;
+			children = (
+				4CB543B8289A9A7300E1A403 /* WeekView.swift */,
+				4CB543BA289A9FA600E1A403 /* Card.swift */,
+			);
+			path = WeekView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,23 +274,29 @@
 			files = (
 				4C2925E3288F8EFC00A9E517 /* NanoChallenge2.xcdatamodeld in Sources */,
 				4CB543AD2899A7B100E1A403 /* CustonCarousel.swift in Sources */,
+				4CB543AF289A4AD900E1A403 /* ScrollWeekView.swift in Sources */,
 				4C2925E0288F8EFC00A9E517 /* Persistence.swift in Sources */,
 				4CB5432B2899506E00E1A403 /* CalendarView.swift in Sources */,
 				4C2925D9288F8EFB00A9E517 /* ContentView.swift in Sources */,
 				4C29261F28906AD600A9E517 /* CoreData.xcdatamodeld in Sources */,
 				4C2926262890794900A9E517 /* Filter.swift in Sources */,
+				4CB543B6289A518B00E1A403 /* View.swift in Sources */,
 				4C29261C2890356200A9E517 /* HomeView.swift in Sources */,
+				4CB543B1289A4FFF00E1A403 /* CustomScroll3.swift in Sources */,
 				4C79813828930B68000BE4BE /* CustomDatePicker.swift in Sources */,
 				4C79813E28985C0E000BE4BE /* CustomWeekView.swift in Sources */,
 				4CB543322899528D00E1A403 /* CalendarWeek.swift in Sources */,
+				4CB543B4289A517300E1A403 /* Scroll.swift in Sources */,
 				4C29261A288FD20300A9E517 /* Helper.swift in Sources */,
 				4CF2A70128907EB600B8D1EC /* NewTaskView.swift in Sources */,
+				4CB543BB289A9FA600E1A403 /* Card.swift in Sources */,
 				4CB5433428997F4D00E1A403 /* CustomDatePickerSmall.swift in Sources */,
 				4C292618288FCBFF00A9E517 /* TaskViewModel.swift in Sources */,
 				4C292615288FCB5000A9E517 /* Task.swift in Sources */,
 				4C79813A28930E56000BE4BE /* DateValue.swift in Sources */,
 				4C79814028986A7D000BE4BE /* BackUPHome.swift in Sources */,
 				4C2925D7288F8EFB00A9E517 /* NanoChallenge2App.swift in Sources */,
+				4CB543B9289A9A7300E1A403 /* WeekView.swift in Sources */,
 				4CB543302899509E00E1A403 /* CalendarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

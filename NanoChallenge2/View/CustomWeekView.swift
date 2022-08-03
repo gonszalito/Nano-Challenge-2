@@ -17,6 +17,10 @@ struct CustomWeekView: View {
         sortDescriptors: []
      ) var tasks: FetchedResults<Task>
     
+    @State var startingOffsetY : CGFloat = UIScreen.main.bounds.height * 0.85
+    
+    @State var currentDragOffsetY: CGFloat = 0
+    
     @StateObject var taskModel : TaskViewModel
     @Binding var currentDate: Date
     
@@ -24,7 +28,7 @@ struct CustomWeekView: View {
     @State var currentWeek: Int = 0
     @State var weekIndex : Int = 0
     @State var currentMonth: Int = 0
-    
+    @State var test : [String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     @State var dateValues : [DateValue] = []
     
     var body: some View {
@@ -46,13 +50,87 @@ struct CustomWeekView: View {
             
             }
             
-            TabView(selection: $index) {
-                           ForEach((days), id: \.self) { index in
-                               Text("\(index)")
-                           }
-                       }
-                       .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            
+//            TabView(selection: $currentWeek) {
+//
+//                        ForEach((weekIndex-1...weekIndex+1), id: \.self) { index in
+//                            let columns = Array(repeating: GridItem(.flexible()), count: 7)
+//                                  LazyVGrid(columns: columns, spacing: 15){
+//                        ForEach(extractPrevWeek(value: index)) { value in
+//
+//                            LazyHStack{
+//                          Text("ADsf")
+//                            }
+////                            .offset(x : startingOffsetY)
+//                            .offset(x: currentDragOffsetY)
+//                            .tag(index)
+//                            .gesture(
+//                              DragGesture()
+//                                  .onChanged { value in
+//                                      withAnimation(.spring()){
+//                                          currentDragOffsetY = value.translation.width
+//                                      }
+//
+//                                  }
+//                                  .onEnded{ value in
+//                                      withAnimation(.spring()) {
+//                                      currentDragOffsetY = 0
+//
+//                                  }
+//                                  }
+//                            )
+//                        }
+////                                  }.onChange(of: currentWeek){ newValue in
+////
+////
+//////                                      weekIndex = weekIndex + 1
+////                                  }
+//
+//                                  }
+//
+//                                  .onChange(of: currentWeek){ value in
+//                                      weekIndex = 0
+//                                  }
+//                        }
+//
+//            }
+//
+//                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//
+//            TabView(selection: $currentWeek) {
+//
+//                        ForEach((test), id: \.self) { index in
+//                           Text("\(index)")
+//                        }.onTapGesture {
+//                            print(currentWeek)
+//                        }
+//
+//
+//
+//            }
+//
+//                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//
+//            TabView(selection: $index) {
+//                           ForEach((test), id: \.self) { value in
+//                               Text("\(value)").onTapGesture {
+//                                   print(index)
+//                               }
+//
+//
+//                           }.onChange(of: index){ value in
+//                               test.append("tsdf")
+//                               print("owr")
+//                           }
+//
+//
+//                       }.onChange(of: index){ value in
+//                           test.append("tsdf")
+//                           print("owr")
+//
+//                       }
+//
+//                       .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//
             
             TabView(selection: $currentWeek) {
                 
@@ -72,6 +150,7 @@ struct CustomWeekView: View {
                                 )
                                 .onTapGesture {
                                     currentDate = value.date
+                                    print(value)
                                 }
                             }
                             .tag(index)
@@ -84,9 +163,7 @@ struct CustomWeekView: View {
 
                                   }
                                   .onChange(of: currentWeek){ value in
-                                      if weekIndex<currentWeek{
-                                          weekIndex += 1
-                                      }
+                                   currentWeek
                                   }
                         }
               
